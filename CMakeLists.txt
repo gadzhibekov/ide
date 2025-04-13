@@ -16,6 +16,8 @@ set(SOURCES
     src/main_window.cpp
     src/panel.cpp
     src/panel_item.cpp
+    src/panel_tools.cpp
+    src/explorer.cpp
     src/ui/label.cpp
     src/ui/button.cpp
 )
@@ -24,6 +26,8 @@ set(HEADERS
     src/main_window.h
     src/panel.h
     src/panel_item.h
+    src/panel_tools.h
+    src/explorer.h
     src/ui/label.h
     src/ui/button.h
 )

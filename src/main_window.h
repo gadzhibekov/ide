@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include "panel.h"
+#include "panel_tools.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -16,8 +17,9 @@ protected:
     void resizeEvent(QResizeEvent* event)   override;
 
 private:
-    QWidget*    central_widget;
-    Panel*      panel;
+    QWidget*        central_widget;
+    Panel*          panel;
+    PanelTools*     panel_tools;
 };
 
 #endif // MAIN_WINDOW_H

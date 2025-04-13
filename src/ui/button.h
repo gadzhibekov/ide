@@ -15,6 +15,7 @@ struct Button : QPushButton
 
     void                        set_icon(const QString& path);
     void                        set_text(const QString& text);
+    void                        set_geometry(int x, int y, int w, int h);
 
 private:
     std::function<void ()>      slot;

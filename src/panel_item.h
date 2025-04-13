@@ -5,10 +5,12 @@
 #define SROLL_SPEED     20
 
 #include "ui/label.h"
+#include "ui/button.h"
 
 #include <QWidget>
 #include <QLabel>
 #include <QString>
+#include <QEvent>
 
 struct PanelItem : QWidget
 {
@@ -17,9 +19,10 @@ struct PanelItem : QWidget
 
     void        set_icon(const QString& path);
     void        set_file(const QString& path);
+    void        set_geometry(int x, int y, int w, int h);
 
-    Label*      get_icon()  const   { return this->icon; }
-    Label*      get_file()  const   { return this->file; }
+    Label*      get_icon()          const   { return this->icon; }
+    Label*      get_file()          const   { return this->file; }
 
     void        scroll_up();
     void        scroll_down();
@@ -29,7 +32,6 @@ struct PanelItem : QWidget
     int         w;
     int         h;
 
-    
 private:
     Label*      icon;
     Label*      file;

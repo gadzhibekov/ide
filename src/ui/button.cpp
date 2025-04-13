@@ -26,3 +26,8 @@ void Button::click()
 {
     slot();
 }
+
+void Button::set_geometry(int x, int y, int w, int h)
+{
+    this->setGeometry(x, y, w, h);
+}

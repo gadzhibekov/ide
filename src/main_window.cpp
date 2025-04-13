@@ -1,8 +1,11 @@
 #include "main_window.h"
 
 #include "panel_item.h"
+#include "explorer.h"
 
 #include <QString>
+
+#include <vector>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
@@ -12,20 +15,12 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setMinimumSize(1200, 800);
     this->setWindowTitle("ide");
 
-    panel = new Panel(central_widget, this->width() / 3, this->height());
-
-    for (int i = 0; i < 20; ++i)
-    {
-        PanelItem* panel_item = new PanelItem(panel, panel->width(), panel->elements_size());
-        panel_item->set_icon("icon_" + QString::number(i + 1));
-        panel_item->set_file("path_to_file_" + QString::number(i + 1));
-
-        panel->add_item(panel_item);
-    }
-
+    panel       = new Panel(central_widget, 600, this->height());
+    panel_tools = new PanelTools(central_widget, panel, 600);
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
 {
-    panel->set_geometry(0, 0, this->width() / 3, this->height());
+    panel->set_geometry(0, 20, panel->width, this->height());
+    panel_tools->set_geometry(0, 20, panel_tools->width, 20);
 }

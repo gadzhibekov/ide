@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-Panel::Panel(QWidget* parent, int width, int height) : QWidget(parent)
+Panel::Panel(QWidget* parent, int width, int height) : QWidget(parent), width(width), height(height)
 {
-    this->setGeometry(0, 0, width, height);
+    this->setGeometry(0, 20, width, height);
     this->setStyleSheet("background-color: gray;");
 }
 
@@ -33,5 +33,21 @@ void Panel::wheelEvent(QWheelEvent* event)
 
 void Panel::set_geometry(int x, int y, int w, int h)
 {
+    width   = w;
+    height  = h;
+
     this->setGeometry(x, y, w, h);
+}
+
+void Panel::remove_all()
+{
+    if (items.size() == 0) return;
+
+    for (auto ptr : items)
+    {
+        delete ptr;
+        ptr = nullptr;
+    }
+
+    items.clear();
 }

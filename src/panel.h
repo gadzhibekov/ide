@@ -17,8 +17,11 @@ struct Panel : QWidget
 
     void                        add_item(PanelItem* panel_item);
     void                        set_geometry(int x, int y, int w, int h);
+    void                        remove_all();
     int                         elements_size() const { return this->items.size(); }
-
+    std::vector<PanelItem *>    get_items_vector() const { return this->items; }
+    int                         width;
+    int                         height;
 
 protected:
     void                        wheelEvent(QWheelEvent* event) override;
@@ -26,7 +29,6 @@ protected:
     
 private:
     std::vector<PanelItem *>    items;
-
 };
 
 #endif // PANEL_H
