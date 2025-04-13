@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QFileInfo>
 #include <QDebug>
+#include <QMessageBox>
 
 QString Explorer::explorer_directory = "";
 QString Explorer::explorer_file      = "";
@@ -14,7 +15,7 @@ void Explorer::get_directory(QString directory, std::vector<QString>& dir_vector
 
     if (!dir.exists())
     {
-        qDebug() << "Директория не существует:" << directory;
+        QMessageBox::critical(nullptr, "Ошибка", "Указанная директория (" + directory + ") не существует");
         return;
     }
     
@@ -40,7 +41,7 @@ void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, std::vector
     {
         QString extension = QFileInfo(file).suffix().toLower();
 
-        if (!(extension == "cpp" || extension == "hpp" || extension == "c" || extension == "h"   ||
+        if (!(extension == "cpp" || extension == "hpp" || extension == "c" || extension == "h" ||
             extension == "gitignore" || QFileInfo(file).fileName() == "CMakeLists.txt")) continue;
 
         PanelItem* panel_item = new PanelItem(panel, 600, panel->elements_size());

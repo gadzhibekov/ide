@@ -11,6 +11,7 @@ struct Label : QLabel
 
     void        set_text(const QString& text)                   { this->setText(text); }
     void        set_geometry(int x, int y, int w, int h);
+    void        set_text_size(int size);
 
     QString     get_text() const                                { return this->text(); }
     

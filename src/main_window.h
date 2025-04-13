@@ -3,6 +3,7 @@
 
 #include "panel.h"
 #include "panel_tools.h"
+#include "ui/dialog_window.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -18,6 +19,7 @@ protected:
 
 private:
     QWidget*        central_widget;
+    DialogWindow*   dialog_window;
     Panel*          panel;
     PanelTools*     panel_tools;
 };

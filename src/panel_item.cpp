@@ -1,5 +1,7 @@
 #include "panel_item.h"
 
+#include "explorer.h"
+
 #include <iostream>
 
 PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) : QWidget(parent)
@@ -46,4 +48,14 @@ void PanelItem::scroll_down()
 void PanelItem::set_geometry(int x, int y, int w, int h)
 {
     this->setGeometry(x, y, w, h);
+}
+
+void PanelItem::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        Explorer::explorer_file = file->get_text();
+    }
+    
+    QWidget::mousePressEvent(event); 
 }

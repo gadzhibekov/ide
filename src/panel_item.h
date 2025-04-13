@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QString>
 #include <QEvent>
+#include <QMouseEvent>
 
 struct PanelItem : QWidget
 {
@@ -31,6 +32,9 @@ struct PanelItem : QWidget
     int         y;
     int         w;
     int         h;
+
+protected:
+    void        mousePressEvent(QMouseEvent* event) override;
 
 private:
     Label*      icon;

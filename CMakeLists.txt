@@ -20,6 +20,7 @@ set(SOURCES
     src/explorer.cpp
     src/ui/label.cpp
     src/ui/button.cpp
+    src/ui/dialog_window.cpp
 )
 
 set(HEADERS
@@ -30,6 +31,7 @@ set(HEADERS
     src/explorer.h
     src/ui/label.h
     src/ui/button.h
+    src/ui/dialog_window.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

@@ -2,13 +2,15 @@
 
 #include "explorer.h"
 
-#include <iostream>
-
 #include <QCoreApplication>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QFile>
 #include <QString>
 
+#include <iostream>
 #include <vector>
+#include <cstdlib>
 
 PanelTools::PanelTools(QWidget* parent, Panel* panel, int width) : QWidget(parent), panel(panel), width(width)
 {
@@ -28,6 +30,8 @@ PanelTools::PanelTools(QWidget* parent, Panel* panel, int width) : QWidget(paren
 
     open_dir = new Button(this, [&](){open_dir_click();});
     open_dir->set_text("o");
+    open_dir->set_enter_slot([=](){std::cout << "enter open folder button\n";});
+    open_dir->set_leave_slot([=](){std::cout << "leave open folder button\n";});
 
     explorer_path = new Label(this);
     explorer_path->set_text("Explorer");
@@ -81,7 +85,19 @@ void PanelTools::regulate_panels(int width)
 
 void PanelTools::remove_item_click()
 {
-    std::cout << "remove\n";
+    if (!(QFile::exists(Explorer::explorer_file))) return;
+
+    QString command = "rm -rf " + Explorer::explorer_file;
+
+    dialog_window->set_title_text("Удалить файл ?");
+    dialog_window->set_data_text(QFileInfo(Explorer::explorer_file).fileName());
+    dialog_window->set_ok_btn_text("Удалить");
+    dialog_window->set_slot([=] () {
+        std::system(command.toStdString().c_str());
+        dialog_window->hide();
+    });
+
+    dialog_window->show();
 }
 
 void PanelTools::open_dir_click()
@@ -108,4 +124,9 @@ void PanelTools::refresh_click()
     Explorer::delete_directory(panel, this);
     Explorer::get_directory(Explorer::explorer_directory, items);
     Explorer::load_directory(panel, this, items);
+}
+
+void PanelTools::set_dialog_window(DialogWindow* dialog_window)
+{
+    this->dialog_window = dialog_window;
 }
