@@ -18,7 +18,6 @@ struct PanelItem : QWidget
     PanelItem(QWidget* parent, int panel_width, int panel_elements_size);
     ~PanelItem() = default;
 
-    void        set_icon(const QString& path);
     void        set_file(const QString& path);
     void        set_geometry(int x, int y, int w, int h);
 
@@ -34,7 +33,10 @@ struct PanelItem : QWidget
     int         h;
 
 protected:
-    void        mousePressEvent(QMouseEvent* event) override;
+    void        mousePressEvent(QMouseEvent* event)         override;
+    void        mouseDoubleClickEvent(QMouseEvent *event)   override;
+    void        enterEvent(QEvent *event)                   override;
+    void        leaveEvent(QEvent *event)                   override;
 
 private:
     Label*      icon;

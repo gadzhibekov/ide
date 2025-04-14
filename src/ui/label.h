@@ -8,12 +8,15 @@
 struct Label : QLabel
 {
     Label(QWidget* parent);
+    ~Label() = default;
 
-    void        set_text(const QString& text)                   { this->setText(text); }
-    void        set_geometry(int x, int y, int w, int h);
+    void        set_text(const QString& text);
     void        set_text_size(int size);
+    void        set_icon(const QString& path);
+    void        set_icon_size(int size);
+    void        set_geometry(int x, int y, int w, int h);
 
-    QString     get_text() const                                { return this->text(); }
+    QString     get_text() const { return this->text(); }
     
 };
 

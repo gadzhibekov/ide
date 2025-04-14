@@ -1,9 +1,16 @@
 #ifndef PANEL_TOOLS_H
 #define PANEL_TOOLS_H
 
-#define MINIMUM_PANEL_SIZE      100
-#define MAXIMUM_PANEL_SIZE      1200
-#define REGULATE_PANEL_SPEED    100
+#define OPEN_DIRECTORY_ICON_PATH    "../res/folder.png"
+#define REFERSH_ICON_PATH           "../res/refresh.png"
+#define DELETE_ICON_PATH            "../res/delete.png"
+#define DELETE_ACTIVE_ICON_PATH     "../res/delete_active.png"
+#define LEFT_ICON_PATH              "../res/left.png"
+#define RIGHT_ICON_PATH             "../res/right.png"
+
+#define MINIMUM_PANEL_SIZE          100
+#define MAXIMUM_PANEL_SIZE          1200
+#define REGULATE_PANEL_SPEED        100
 
 #include "ui/button.h"
 #include "ui/label.h"

@@ -25,6 +25,7 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
 
     ok = new Button(this);
     ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
+    cancel->set_text("ОК");
 
     QObject::connect(cancel, &Button::clicked, this, &DialogWindow::click_cancel);
 
@@ -55,6 +56,11 @@ void DialogWindow::set_data_text(const QString& text)
 void DialogWindow::set_ok_btn_text(const QString& text)
 {
     ok->set_text(text);
+}
+
+void DialogWindow::set_cancel_btn_text(const QString& text)
+{
+    cancel->set_text(text);
 }
 
 void DialogWindow::click_cancel()

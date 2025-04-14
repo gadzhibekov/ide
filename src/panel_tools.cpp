@@ -17,21 +17,25 @@ PanelTools::PanelTools(QWidget* parent, Panel* panel, int width) : QWidget(paren
     this->setStyleSheet("background-color: grey;");
 
     right_regulator = new Button(this, [&](){right_regulate_click();});
-    right_regulator->set_text(">");
+    right_regulator->set_icon(RIGHT_ICON_PATH);
 
     left_regulator = new Button(this, [&](){left_regulate_click();});
-    left_regulator->set_text("<");
+    left_regulator->set_icon(LEFT_ICON_PATH);
 
     remove_item = new Button(this, [&](){remove_item_click();});
-    remove_item->set_text("r");
+    remove_item->set_icon(DELETE_ICON_PATH);
+    remove_item->set_icon_size(20);
+    remove_item->set_enter_slot([=](){remove_item->set_icon(DELETE_ACTIVE_ICON_PATH);
+                                      remove_item->set_icon_size(20);});
+    remove_item->set_leave_slot([=](){remove_item->set_icon(DELETE_ICON_PATH);
+                                      remove_item->set_icon_size(20);});
 
     refresh = new Button(this, [&](){refresh_click();});
-    refresh->set_text("u");
+    refresh->set_icon(REFERSH_ICON_PATH);
 
     open_dir = new Button(this, [&](){open_dir_click();});
-    open_dir->set_text("o");
-    open_dir->set_enter_slot([=](){std::cout << "enter open folder button\n";});
-    open_dir->set_leave_slot([=](){std::cout << "leave open folder button\n";});
+    open_dir->set_icon(OPEN_DIRECTORY_ICON_PATH);
+    open_dir->set_icon_size(18);
 
     explorer_path = new Label(this);
     explorer_path->set_text("Explorer");
@@ -85,12 +89,13 @@ void PanelTools::regulate_panels(int width)
 
 void PanelTools::remove_item_click()
 {
-    if (!(QFile::exists(Explorer::explorer_file))) return;
+    if (!(QFile::exists(Explorer::explorer_current_file))) return;
 
-    QString command = "rm -rf " + Explorer::explorer_file;
+    QString command = "rm -rf " + Explorer::explorer_current_file;
 
     dialog_window->set_title_text("Удалить файл ?");
-    dialog_window->set_data_text(QFileInfo(Explorer::explorer_file).fileName());
+    dialog_window->set_data_text(QFileInfo(Explorer::explorer_current_file).fileName());
+    dialog_window->set_cancel_btn_text("Отмена");
     dialog_window->set_ok_btn_text("Удалить");
     dialog_window->set_slot([=] () {
         std::system(command.toStdString().c_str());
