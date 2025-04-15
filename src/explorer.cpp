@@ -57,7 +57,7 @@ void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, std::vector
         if (extension == "gitignore")                           panel_item->get_icon()->set_icon(GITIGNORE_ICON_PATH);
         if (QFileInfo(file).fileName() == "CMakeLists.txt")     panel_item->get_icon()->set_icon(CMAKE_ICON_PATH);
 
-        panel_item->get_icon()->set_icon_size(40);
+        panel_item->get_icon()->set_icon_size(40, 40);
         panel->add_item(panel_item);
     }
 

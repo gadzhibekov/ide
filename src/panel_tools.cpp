@@ -12,7 +12,8 @@
 #include <vector>
 #include <cstdlib>
 
-PanelTools::PanelTools(QWidget* parent, Panel* panel, int width) : QWidget(parent), panel(panel), width(width)
+PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width) 
+: QWidget(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
 {
     this->setStyleSheet("background-color: grey;");
 
@@ -24,18 +25,18 @@ PanelTools::PanelTools(QWidget* parent, Panel* panel, int width) : QWidget(paren
 
     remove_item = new Button(this, [&](){remove_item_click();});
     remove_item->set_icon(DELETE_ICON_PATH);
-    remove_item->set_icon_size(20);
+    remove_item->set_icon_size(20, 20);
     remove_item->set_enter_slot([=](){remove_item->set_icon(DELETE_ACTIVE_ICON_PATH);
-                                      remove_item->set_icon_size(20);});
+                                      remove_item->set_icon_size(20, 20);});
     remove_item->set_leave_slot([=](){remove_item->set_icon(DELETE_ICON_PATH);
-                                      remove_item->set_icon_size(20);});
+                                      remove_item->set_icon_size(20, 20);});
 
     refresh = new Button(this, [&](){refresh_click();});
     refresh->set_icon(REFERSH_ICON_PATH);
 
     open_dir = new Button(this, [&](){open_dir_click();});
     open_dir->set_icon(OPEN_DIRECTORY_ICON_PATH);
-    open_dir->set_icon_size(18);
+    open_dir->set_icon_size(18, 18);
 
     explorer_path = new Label(this);
     explorer_path->set_text("Explorer");
@@ -85,6 +86,7 @@ void PanelTools::regulate_panels(int width)
     explorer_path->set_geometry(0, 0, width - 100, 20);
 
     panel->set_geometry(0, 20, width, panel->height);
+    welcome->set_geometry(panel->width, 0, main_window->width() - panel->width, main_window->height());
 }
 
 void PanelTools::remove_item_click()
@@ -131,7 +133,7 @@ void PanelTools::refresh_click()
     Explorer::load_directory(panel, this, items);
 }
 
-void PanelTools::set_dialog_window(DialogWindow* dialog_window)
+void PanelTools::set_dialog_window_ptr(DialogWindow* dialog_window)
 {
     this->dialog_window = dialog_window;
 }

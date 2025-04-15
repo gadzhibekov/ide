@@ -18,14 +18,8 @@ void Panel::wheelEvent(QWheelEvent* event)
 {
     for (auto item : items)
     {
-        if (event->angleDelta().y() > 0)
-        {
-            item->scroll_up();
-        }
-        else
-        {
-            item->scroll_down();
-        }
+        if (event->angleDelta().y() > 0)    item->scroll_up();
+        else                                item->scroll_down();
     }
     
     QWidget::wheelEvent(event);
@@ -45,6 +39,8 @@ void Panel::remove_all()
 
     for (auto ptr : items)
     {
+        if (!ptr) continue;
+        
         delete ptr;
         ptr = nullptr;
     }

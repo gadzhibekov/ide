@@ -16,13 +16,12 @@
 struct PanelItem : QWidget
 {
     PanelItem(QWidget* parent, int panel_width, int panel_elements_size);
-    ~PanelItem() = default;
 
     void        set_file(const QString& path);
     void        set_geometry(int x, int y, int w, int h);
 
-    Label*      get_icon()          const   { return this->icon; }
-    Label*      get_file()          const   { return this->file; }
+    Label*      get_icon()   const   { return this->icon; }
+    Label*      get_file()   const   { return this->file; }
 
     void        scroll_up();
     void        scroll_down();

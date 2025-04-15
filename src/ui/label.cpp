@@ -35,7 +35,7 @@ void Label::set_text_size(int size)
     this->setFont(font);
 }
 
-void Label::set_icon_size(int size)
+void Label::set_icon_size(int width, int height)
 {
-    this->setFixedSize(size, size);
+    this->setFixedSize(width, height);
 }

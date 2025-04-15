@@ -22,9 +22,9 @@ void Button::set_icon(const QString& path)
     this->setIconSize(QSize(15, 15));
 }
 
-void Button::set_icon_size(int size)
+void Button::set_icon_size(int width, int height)
 {
-    this->setIconSize(QSize(size, size));
+    this->setIconSize(QSize(width, height));
 }
 
 void Button::set_text(const QString& text)

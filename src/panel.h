@@ -13,7 +13,6 @@
 struct Panel : QWidget
 {
     Panel(QWidget* parent, int width, int height);
-    ~Panel() = default;
 
     void                        add_item(PanelItem* panel_item);
     void                        set_geometry(int x, int y, int w, int h);

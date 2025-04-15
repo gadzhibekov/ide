@@ -15,19 +15,22 @@
 #include "ui/button.h"
 #include "ui/label.h"
 #include "ui/dialog_window.h"
+#include "main_window.h"
 #include "panel.h"
+#include "welcome.h"
 
 #include <QWidget>
 #include <QString>
 
+struct MainWindow;
+
 struct PanelTools : QWidget
 {
-    PanelTools(QWidget* parent, Panel* panel, int width);
-    ~PanelTools() = default;
-
+    PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width);
+    
     void                set_geometry(int x, int y, int w, int h);
     void                set_explorer_path(const QString& path);
-    void                set_dialog_window(DialogWindow* dialog_window);
+    void                set_dialog_window_ptr(DialogWindow* dialog_window);
 
     int                 width;
 
@@ -40,6 +43,8 @@ private:
     Button*             left_regulator;
     Button*             right_regulator;
     DialogWindow*       dialog_window;
+    MainWindow*         main_window;
+    Welcome*            welcome;
 
     void                open_dir_click();
     void                refresh_click();

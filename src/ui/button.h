@@ -12,15 +12,14 @@ struct Button : QPushButton
 {
     Button(QWidget* parent);
     Button(QWidget* parent, std::function<void()> slot);
-    ~Button() = default;
-
+    
     void                        set_icon(const QString& path);
     void                        set_text(const QString& text);
     void                        set_color(int red, int green, int blue);
     void                        set_color(int red, int green, int blue, double alpha);
     void                        set_opacity(double opacity);
     void                        set_geometry(int x, int y, int w, int h);
-    void                        set_icon_size(int size);
+    void                        set_icon_size(int width, int height);
     void                        set_enter_slot(std::function<void()> slot);
     void                        set_leave_slot(std::function<void()> slot);
 
