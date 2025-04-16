@@ -14,9 +14,9 @@
 #include <cstdlib>
 
 PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width) 
-: QWidget(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
+: QWidget(parent), parent(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
 {
-    this->setStyleSheet("background-color: grey;");
+    this->setStyleSheet("background-color: black;");
 
     right_regulator = new Button(this, [&](){right_regulate_click();});
     right_regulator->set_icon(RIGHT_ICON_PATH);
@@ -41,6 +41,7 @@ PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, W
 
     explorer_path = new Label(this);
     explorer_path->set_text(Translator::current_language_data_set[2]);
+    explorer_path->set_text_color(255, 255, 255);
 
     regulate_panels(width);
 }
@@ -100,6 +101,7 @@ void PanelTools::remove_item_click()
     dialog_window->set_data_text(QFileInfo(Explorer::explorer_current_file).fileName());
     dialog_window->set_cancel_btn_text(Translator::current_language_data_set[7]);
     dialog_window->set_ok_btn_text(Translator::current_language_data_set[8]);
+    dialog_window->set_locate(parent->width(), parent->height());
     dialog_window->set_slot([=] () {
         std::system(command.toStdString().c_str());
         dialog_window->hide();
@@ -119,7 +121,7 @@ void PanelTools::open_dir_click()
         Explorer::delete_directory(panel, this);
         Explorer::explorer_directory = directory_path;
         Explorer::get_directory(directory_path, items);
-        Explorer::load_directory(panel, this, items);
+        Explorer::load_directory(panel, this, welcome, items);
     }
 }
 
@@ -131,7 +133,7 @@ void PanelTools::refresh_click()
 
     Explorer::delete_directory(panel, this);
     Explorer::get_directory(Explorer::explorer_directory, items);
-    Explorer::load_directory(panel, this, items);
+    Explorer::load_directory(panel, this, welcome, items);
 }
 
 void PanelTools::set_dialog_window_ptr(DialogWindow* dialog_window)

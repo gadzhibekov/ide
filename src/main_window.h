@@ -15,6 +15,7 @@
 #include <QResizeEvent>
 
 struct PanelTools;
+struct Welcome;
 
 struct MainWindow : QMainWindow
 {

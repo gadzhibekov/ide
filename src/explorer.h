@@ -10,6 +10,7 @@
 #include "panel.h"
 #include "panel_item.h"
 #include "panel_tools.h"
+#include "welcome.h"
 
 #include <QString>
 
@@ -17,7 +18,7 @@
 
 struct Explorer
 {
-    static void                         load_directory(Panel* panel, PanelTools* panel_tools, std::vector<QString> dir_vector);
+    static void                         load_directory(Panel* panel, PanelTools* panel_tools, Welcome* welcome, std::vector<QString> dir_vector);
     static void                         delete_directory(Panel* panel, PanelTools* panel_tools);
     static void                         get_directory(QString directory, std::vector<QString>& dir_vector);
 

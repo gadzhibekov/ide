@@ -36,7 +36,7 @@ void Explorer::get_directory(QString directory, std::vector<QString>& dir_vector
     }
 }
 
-void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, std::vector<QString> dir_vector)
+void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, Welcome* welcome, std::vector<QString> dir_vector)
 {
     for (auto file : dir_vector)
     {
@@ -62,6 +62,7 @@ void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, std::vector
     }
 
     panel_tools->set_explorer_path(Explorer::explorer_directory);
+    welcome->hide();
 }
 
 void Explorer::delete_directory(Panel* panel, PanelTools* panel_tools)

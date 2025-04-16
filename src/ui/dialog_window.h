@@ -19,6 +19,7 @@ struct DialogWindow : QWidget
     void                        set_data_text_size(int size);
     void                        set_ok_btn_text(const QString& text);
     void                        set_cancel_btn_text(const QString& text);
+    void                        set_locate(int x, int y);
 
 private:
     Label*                      title;

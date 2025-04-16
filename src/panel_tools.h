@@ -23,6 +23,7 @@
 #include <QString>
 
 struct MainWindow;
+struct Welcome;
 
 struct PanelTools : QWidget
 {
@@ -35,6 +36,7 @@ struct PanelTools : QWidget
     int                 width;
 
 private:
+    QWidget*            parent;
     Panel*              panel;
     Label*              explorer_path;
     Button*             open_dir;

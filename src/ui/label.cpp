@@ -2,6 +2,8 @@
 
 #include <QFont>
 #include <QPixmap>
+#include <QColor>
+#include <QPalette>
 
 Label::Label(QWidget* parent) : QLabel(parent)
 {
@@ -38,4 +40,12 @@ void Label::set_text_size(int size)
 void Label::set_icon_size(int width, int height)
 {
     this->setFixedSize(width, height);
+}
+
+void Label::set_text_color(int red, int green, int blue)
+{
+    QPalette palette = this->palette();
+    QColor customColor(red, green, blue);
+    palette.setColor(QPalette::WindowText, customColor);
+    this->setPalette(palette);
 }

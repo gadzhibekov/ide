@@ -8,7 +8,7 @@
 
 DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(parent)
 {
-    this->setGeometry(width / 2 - 100, height / 2 - 150, 300, 200);
+    this->setGeometry(width / 2 - 150, height / 2 - 100, 300, 200);
     this->setStyleSheet("background-color: grey;");
 
 
@@ -80,4 +80,9 @@ void DialogWindow::set_title_text_size(int size)
 void DialogWindow::set_data_text_size(int size)
 {
     data->set_text_size(size);
+}
+
+void DialogWindow::set_locate(int x, int y)
+{
+    this->setGeometry(x / 2 - 150, y / 2 - 100, 300, 200);
 }

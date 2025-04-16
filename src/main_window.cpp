@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
     central_widget  = new QWidget(this);
 
-
+    this->setStyleSheet("background-color: black;");
     this->setCentralWidget(central_widget);
     this->setMinimumSize(MINIMUM_MAIN_WINDOW_WIDTH, MINIMUM_MAIN_WINDOW_HEIGHT);
     this->setWindowTitle(MAIN_WINDOW_TITLE);
@@ -31,7 +31,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
     panel_tools->set_dialog_window_ptr(dialog_window);
     welcome->set_dialog_window_ptr(dialog_window);
-
+    welcome->set_panel_tools_ptr(panel_tools);
+    welcome->set_panel_ptr(panel);
 
     if (!config_data.last_project_dir.isEmpty())
     {
@@ -51,7 +52,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
             Explorer::delete_directory(panel, panel_tools);
             Explorer::explorer_directory = config_data.last_project_dir;
             Explorer::get_directory(config_data.last_project_dir, items);
-            Explorer::load_directory(panel, panel_tools, items);
+            Explorer::load_directory(panel, panel_tools, welcome, items);
 
             dialog_window->hide();
         });

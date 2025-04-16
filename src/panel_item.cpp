@@ -8,11 +8,16 @@
 
 PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) : QWidget(parent)
 {
+    this->setStyleSheet("background-color: black;");
+
     icon    = new Label(this);
     file    = new Label(this);
 
     icon->setAlignment(Qt::AlignVCenter);
     file->setAlignment(Qt::AlignVCenter);
+
+    icon->set_text_color(255, 255, 255);
+    file->set_text_color(255, 255, 255);
     
     x = 0;
     y = panel_elements_size * PANEL_ITEM_SIZE;
