@@ -1,5 +1,7 @@
 #include "dialog_window.h"
 
+#include "../translator.h"
+
 #include <iostream>
 
 #include <QObject>
@@ -21,11 +23,11 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
 
     cancel = new Button(this);
     cancel->set_geometry(0, 150, this->width() / 2, 50);
-    cancel->set_text("Закрыть");
+    cancel->set_text(Translator::current_language_data_set[7]);
 
     ok = new Button(this);
     ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
-    cancel->set_text("ОК");
+    cancel->set_text(Translator::current_language_data_set[14]);
 
     QObject::connect(cancel, &Button::clicked, this, &DialogWindow::click_cancel);
 
@@ -66,4 +68,14 @@ void DialogWindow::set_cancel_btn_text(const QString& text)
 void DialogWindow::click_cancel()
 {
     this->hide();
+}
+
+void DialogWindow::set_title_text_size(int size)
+{
+    title->set_text_size(size);
+}
+
+void DialogWindow::set_data_text_size(int size)
+{
+    data->set_text_size(size);
 }

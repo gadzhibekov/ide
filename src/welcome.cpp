@@ -1,9 +1,14 @@
 #include "welcome.h"
 
 #include "panel_tools.h"
+#include "translator.h"
 
 #include <QObject>
 #include <QUrl>
+// #include <QProcess>
+// #include <QApplication>
+
+#include <iostream>
 
 Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent)
 {
@@ -11,22 +16,22 @@ Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent)
 
     welcome_text_1 = new Label(this);
     welcome_text_1->set_text_size(15);
-    welcome_text_1->set_text("Нажмите на кнопку");
+    welcome_text_1->set_text(Translator::current_language_data_set[0]);
 
     open_dir_prototype = new Button(this);
     open_dir_prototype->set_icon(OPEN_DIRECTORY_ICON_PATH);
 
     welcome_text_2 = new Label(this);
     welcome_text_2->set_text_size(15);
-    welcome_text_2->set_text("для того чтобы открыть директорию");
+    welcome_text_2->set_text(Translator::current_language_data_set[1]);
 
-    translate_to_leki = new Button(this);
+    translate_to_leki = new Button(this, [=](){translate_to_leki_slot();});
     translate_to_leki->set_text("l");
 
-    translate_to_ru = new Button(this);
+    translate_to_ru = new Button(this, [=](){translate_to_ru_slot();});
     translate_to_ru->set_text("r");
 
-    translate_to_en = new Button(this);
+    translate_to_en = new Button(this, [=](){translate_to_en_slot();});
     translate_to_en->set_text("e");
 
     github_link = new Button(this);
@@ -58,4 +63,49 @@ void Welcome::resizeEvent(QResizeEvent* event)
 void Welcome::set_geometry(int x, int y, int w, int h)
 {
     this->setGeometry(x, y, w, h);
+}
+
+void Welcome::set_dialog_window_ptr(DialogWindow* dialog_window)
+{
+    this->dialog_window = dialog_window;
+}
+
+void Welcome::translate_to_leki_slot()
+{
+    Translator::current_language = "leki";
+
+    dialog_window_fill(); 
+}
+
+void Welcome::translate_to_ru_slot()
+{
+    Translator::current_language = "ru";
+
+    dialog_window_fill();
+}
+
+void Welcome::translate_to_en_slot()
+{
+    Translator::current_language = "en";
+
+    dialog_window_fill();
+}
+
+void Welcome::dialog_window_fill()
+{
+    dialog_window->set_title_text(Translator::current_language_data_set[9]);
+    dialog_window->set_title_text_size(12);
+    dialog_window->set_data_text(Translator::current_language_data_set[10]);
+    dialog_window->set_data_text_size(10);
+    dialog_window->set_cancel_btn_text(Translator::current_language_data_set[11]);
+    dialog_window->set_ok_btn_text(Translator::current_language_data_set[12]);
+    dialog_window->set_slot([=] () {
+        
+        // QProcess::startDetached(QCoreApplication::applicationFilePath());
+        // QApplication::quit();
+
+        dialog_window->hide();
+    });
+
+    dialog_window->show();
 }

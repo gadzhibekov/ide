@@ -5,6 +5,7 @@
 
 #include "ui/button.h"
 #include "ui/label.h"
+#include "ui/dialog_window.h"
 #include "player.h"
 
 #include <QWidget>
@@ -16,6 +17,7 @@ struct Welcome : QWidget
     Welcome(QWidget* parent, int width, int height);
 
     void            set_geometry(int x, int y, int w, int h);
+    void            set_dialog_window_ptr(DialogWindow* dialog_window);
 
     Label*          get_welcome_text_1()        const   { return this->welcome_text_1;      }
     Label*          get_welcome_text_2()        const   { return this->welcome_text_2;      }
@@ -33,6 +35,7 @@ protected:
 private:
     QWidget*        animation;
     Player*         player;
+    DialogWindow*   dialog_window;
     Label*          welcome_text_1;
     Label*          welcome_text_2;
     Button*         open_dir_prototype;
@@ -41,6 +44,11 @@ private:
     Button*         translate_to_en;
     Button*         github_link;
     Button*         tg_link;
+
+    void            translate_to_leki_slot();
+    void            translate_to_ru_slot();
+    void            translate_to_en_slot();
+    void            dialog_window_fill();
 };
 
 #endif // WELCOME

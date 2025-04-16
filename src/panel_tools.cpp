@@ -1,6 +1,7 @@
 #include "panel_tools.h"
 
 #include "explorer.h"
+#include "translator.h"
 
 #include <QCoreApplication>
 #include <QFileDialog>
@@ -39,7 +40,7 @@ PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, W
     open_dir->set_icon_size(18, 18);
 
     explorer_path = new Label(this);
-    explorer_path->set_text("Explorer");
+    explorer_path->set_text(Translator::current_language_data_set[2]);
 
     regulate_panels(width);
 }
@@ -53,7 +54,7 @@ void PanelTools::set_geometry(int x, int y, int w, int h)
 
 void PanelTools::set_explorer_path(const QString& path)
 {
-    explorer_path->set_text((QString)"EXPLORER: " + path);
+    explorer_path->set_text(Translator::current_language_data_set[2] + path);
 }
 
 void PanelTools::left_regulate_click()
@@ -95,10 +96,10 @@ void PanelTools::remove_item_click()
 
     QString command = "rm -rf " + Explorer::explorer_current_file;
 
-    dialog_window->set_title_text("Удалить файл ?");
+    dialog_window->set_title_text(Translator::current_language_data_set[6]);
     dialog_window->set_data_text(QFileInfo(Explorer::explorer_current_file).fileName());
-    dialog_window->set_cancel_btn_text("Отмена");
-    dialog_window->set_ok_btn_text("Удалить");
+    dialog_window->set_cancel_btn_text(Translator::current_language_data_set[7]);
+    dialog_window->set_ok_btn_text(Translator::current_language_data_set[8]);
     dialog_window->set_slot([=] () {
         std::system(command.toStdString().c_str());
         dialog_window->hide();
@@ -109,7 +110,7 @@ void PanelTools::remove_item_click()
 
 void PanelTools::open_dir_click()
 {
-    QString directory_path = QFileDialog::getExistingDirectory(nullptr, "Выберите директорию", QDir::homePath());
+    QString directory_path = QFileDialog::getExistingDirectory(nullptr, Translator::current_language_data_set[13], QDir::homePath());
 
     if (!directory_path.isEmpty()) 
     {

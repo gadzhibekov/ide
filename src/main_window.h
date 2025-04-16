@@ -19,9 +19,10 @@ struct PanelTools;
 struct MainWindow : QMainWindow
 {
     explicit MainWindow(QWidget* parent);
+    ~MainWindow();
 
 protected:
-    void resizeEvent(QResizeEvent* event)   override;
+    void            resizeEvent(QResizeEvent* event)   override;
 
 private:
     QWidget*        central_widget;

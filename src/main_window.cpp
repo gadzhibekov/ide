@@ -2,13 +2,21 @@
 
 #include "panel_item.h"
 #include "explorer.h"
+#include "config.h"
+#include "translator.h"
 
 #include <QString>
+#include <QDebug>
 
 #include <vector>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
+    ConfigData config_data = Config::read();
+
+    Translator translator(config_data.language);
+
     central_widget  = new QWidget(this);
 
     this->setCentralWidget(central_widget);
@@ -21,6 +29,35 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     dialog_window   = new DialogWindow(central_widget, this->width(), this->height());
 
     panel_tools->set_dialog_window_ptr(dialog_window);
+    welcome->set_dialog_window_ptr(dialog_window);
+
+
+    if (!config_data.last_project_dir.isEmpty())
+    {
+        dialog_window->set_title_text(Translator::current_language_data_set[3]);
+        dialog_window->set_title_text_size(12);
+        dialog_window->set_data_text(config_data.last_project_dir);
+        dialog_window->set_data_text_size(10);
+        dialog_window->set_cancel_btn_text(Translator::current_language_data_set[4]);
+        dialog_window->set_ok_btn_text(Translator::current_language_data_set[5]);
+        dialog_window->set_slot([=] () {
+
+            std::vector<QString> items;
+            Explorer::delete_directory(panel, panel_tools);
+            Explorer::explorer_directory = config_data.last_project_dir;
+            Explorer::get_directory(config_data.last_project_dir, items);
+            Explorer::load_directory(panel, panel_tools, items);
+
+            dialog_window->hide();
+        });
+
+        dialog_window->show();
+    }
+}
+
+MainWindow::~MainWindow()
+{
+    Config::write(ConfigData({Explorer::explorer_directory, Translator::current_language}));
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)

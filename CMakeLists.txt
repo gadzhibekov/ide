@@ -20,6 +20,8 @@ set(SOURCES
     src/explorer.cpp
     src/welcome.cpp
     src/player.cpp
+    src/config.cpp
+    src/translator.cpp
     src/ui/label.cpp
     src/ui/button.cpp
     src/ui/dialog_window.cpp
@@ -33,6 +35,8 @@ set(HEADERS
     src/explorer.h
     src/welcome.h
     src/player.h
+    src/config.h
+    src/translator.h
     src/ui/label.h
     src/ui/button.h
     src/ui/dialog_window.h
