@@ -48,7 +48,6 @@ private:
     void            translate_to_leki_slot();
     void            translate_to_ru_slot();
     void            translate_to_en_slot();
-    void            dialog_window_fill();
 };
 
 #endif // WELCOME

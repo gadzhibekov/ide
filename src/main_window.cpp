@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
     central_widget  = new QWidget(this);
 
+
     this->setCentralWidget(central_widget);
     this->setMinimumSize(MINIMUM_MAIN_WINDOW_WIDTH, MINIMUM_MAIN_WINDOW_HEIGHT);
     this->setWindowTitle(MAIN_WINDOW_TITLE);
@@ -35,7 +36,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     if (!config_data.last_project_dir.isEmpty())
     {
         dialog_window->set_title_text(Translator::current_language_data_set[3]);
-        dialog_window->set_title_text_size(12);
+
+        if (config_data.language == "leki")         dialog_window->set_title_text_size(10);
+        else                                        dialog_window->set_title_text_size(12);
+
         dialog_window->set_data_text(config_data.last_project_dir);
         dialog_window->set_data_text_size(10);
         dialog_window->set_cancel_btn_text(Translator::current_language_data_set[4]);
@@ -43,6 +47,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
         dialog_window->set_slot([=] () {
 
             std::vector<QString> items;
+
             Explorer::delete_directory(panel, panel_tools);
             Explorer::explorer_directory = config_data.last_project_dir;
             Explorer::get_directory(config_data.last_project_dir, items);

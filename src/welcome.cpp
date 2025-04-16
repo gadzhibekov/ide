@@ -2,13 +2,13 @@
 
 #include "panel_tools.h"
 #include "translator.h"
+#include "explorer.h"
+#include "config.h"
 
 #include <QObject>
 #include <QUrl>
-// #include <QProcess>
-// #include <QApplication>
+#include <QMessageBox>
 
-#include <iostream>
 
 Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent)
 {
@@ -74,38 +74,19 @@ void Welcome::translate_to_leki_slot()
 {
     Translator::current_language = "leki";
 
-    dialog_window_fill(); 
+    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[15] + Translator::current_language_data_set[18]);
 }
 
 void Welcome::translate_to_ru_slot()
 {
     Translator::current_language = "ru";
 
-    dialog_window_fill();
+    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[16] + Translator::current_language_data_set[18]);
 }
 
 void Welcome::translate_to_en_slot()
 {
     Translator::current_language = "en";
 
-    dialog_window_fill();
-}
-
-void Welcome::dialog_window_fill()
-{
-    dialog_window->set_title_text(Translator::current_language_data_set[9]);
-    dialog_window->set_title_text_size(12);
-    dialog_window->set_data_text(Translator::current_language_data_set[10]);
-    dialog_window->set_data_text_size(10);
-    dialog_window->set_cancel_btn_text(Translator::current_language_data_set[11]);
-    dialog_window->set_ok_btn_text(Translator::current_language_data_set[12]);
-    dialog_window->set_slot([=] () {
-        
-        // QProcess::startDetached(QCoreApplication::applicationFilePath());
-        // QApplication::quit();
-
-        dialog_window->hide();
-    });
-
-    dialog_window->show();
+    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[17] + Translator::current_language_data_set[18]);
 }

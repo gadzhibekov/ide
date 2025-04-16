@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv)
 {
-    std::cout << "1\n";
+    // std::cout << "1\n";/
 
     QApplication app(argc, argv);
 

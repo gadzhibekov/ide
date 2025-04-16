@@ -23,7 +23,7 @@ ConfigData Config::read()
 
         std::system(command.toStdString().c_str());
 
-        return ConfigData({"", ""});
+        return ConfigData({"", "ru"});
     }
 
     QString file_path = get_standart_temp_path() + "/ide_configuration.json";
@@ -49,7 +49,7 @@ ConfigData Config::read()
         file.close();
     }
 
-    return ConfigData({"", ""});
+    return ConfigData({"", "ru"});
 }
 
 void Config::write(ConfigData&& config_data)

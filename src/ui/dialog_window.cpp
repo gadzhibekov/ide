@@ -11,6 +11,7 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
     this->setGeometry(width / 2 - 100, height / 2 - 150, 300, 200);
     this->setStyleSheet("background-color: grey;");
 
+
     title = new Label(this);
     title->set_geometry(20, 20, 260, 40);
     title->setAlignment(Qt::AlignCenter);
@@ -27,6 +28,7 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
 
     ok = new Button(this);
     ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
+
     cancel->set_text(Translator::current_language_data_set[14]);
 
     QObject::connect(cancel, &Button::clicked, this, &DialogWindow::click_cancel);
