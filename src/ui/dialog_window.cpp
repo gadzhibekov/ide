@@ -2,15 +2,12 @@
 
 #include "../translator.h"
 
-#include <iostream>
-
 #include <QObject>
 
 DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(parent)
 {
     this->setGeometry(width / 2 - 150, height / 2 - 100, 300, 200);
     this->setStyleSheet("background-color: grey;");
-
 
     title = new Label(this);
     title->set_geometry(20, 20, 260, 40);
@@ -22,12 +19,12 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
     data->setAlignment(Qt::AlignCenter);
     data->set_text_size(12);
 
+    ok = new Button(this);
+    ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
+
     cancel = new Button(this);
     cancel->set_geometry(0, 150, this->width() / 2, 50);
     cancel->set_text(Translator::current_language_data_set[7]);
-
-    ok = new Button(this);
-    ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
 
     cancel->set_text(Translator::current_language_data_set[14]);
 
@@ -69,7 +66,7 @@ void DialogWindow::set_cancel_btn_text(const QString& text)
 
 void DialogWindow::click_cancel()
 {
-    this->hide();
+    hide_widget();
 }
 
 void DialogWindow::set_title_text_size(int size)
@@ -84,5 +81,26 @@ void DialogWindow::set_data_text_size(int size)
 
 void DialogWindow::set_locate(int x, int y)
 {
-    this->setGeometry(x / 2 - 150, y / 2 - 100, 300, 200);
+    setGeometry(x / 2 - 150, y / 2 - 100, 300, 200);
+}
+
+void DialogWindow::show_widget()
+{
+    if (slot)
+    {
+        cancel->set_geometry(0, 150, this->width() / 2, 50);
+        ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
+    }
+    else
+    {
+        cancel->set_geometry(0, 150, this->width(), 50);
+        ok->set_geometry(this->width() / 2, 150, 0, 0);
+    }
+
+    show();
+}
+
+void DialogWindow::hide_widget()
+{
+    hide();
 }

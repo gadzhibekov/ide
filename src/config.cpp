@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QByteArray>
 
 #include <iostream>
 #include <cstdlib>
@@ -17,31 +18,31 @@ QString Config::get_standart_temp_path()
 
 ConfigData Config::read()
 {
-    if (!(QFile(get_standart_temp_path() + "/ide_configuration.json").exists()))
+    if (!(QFile(get_standart_temp_path() + CONFIG_FILE_NAME).exists()))
     {
-        QString command = "touch " + get_standart_temp_path() + "/ide_configuration.json";
+        QString command = "touch " + get_standart_temp_path() + CONFIG_FILE_NAME;
 
         std::system(command.toStdString().c_str());
 
-        return ConfigData({"", "ru"});
+        return ConfigData({"", "leki"});
     }
 
-    QString file_path = get_standart_temp_path() + "/ide_configuration.json";
+    QString file_path = get_standart_temp_path() + CONFIG_FILE_NAME;
     QFile file(file_path);
 
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) 
     {
-        QByteArray data     = file.readAll();
-        QJsonDocument doc   = QJsonDocument::fromJson(data);
+        QByteArray      data    = file.readAll();
+        QJsonDocument   doc     = QJsonDocument::fromJson(data);
 
         if (doc.isObject()) 
         {
-            QJsonObject obj = doc.object();
-            QString directory = obj["directory"].toString();
-            QString language = obj["language"].toString();
+            QJsonObject obj         = doc.object();
+            QString     directory   = obj["directory"].toString();
+            QString     language    = obj["language"].toString();
 
             if (!(QDir(directory).exists()))                                        directory   = "";
-            if (!(language == "ru" || language == "en" || language == "leki"))      language    = "ru";
+            if (!(language == "ru" || language == "en" || language == "leki"))      language    = "leki";
 
             return ConfigData({directory, language});
         }
@@ -49,20 +50,18 @@ ConfigData Config::read()
         file.close();
     }
 
-    return ConfigData({"", "ru"});
+    return ConfigData({"", "leki"});
 }
 
 void Config::write(ConfigData&& config_data)
 {
     QJsonObject obj;
     
-    obj["directory"]    = (QString)config_data.last_project_dir;;
-    obj["language"]     = (QString)config_data.language;
+    obj["directory"]    = static_cast<QString>(config_data.last_project_dir);
+    obj["language"]     = static_cast<QString>(config_data.language);
 
     QJsonDocument doc(obj);
-    QString file_path = get_standart_temp_path() + "/ide_configuration.json";
-
-    QFile file(file_path);
+    QFile file(get_standart_temp_path() + CONFIG_FILE_NAME);
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) 
     {

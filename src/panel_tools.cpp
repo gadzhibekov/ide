@@ -93,21 +93,30 @@ void PanelTools::regulate_panels(int width)
 
 void PanelTools::remove_item_click()
 {
-    if (!(QFile::exists(Explorer::explorer_current_file))) return;
+    std::cout << Explorer::explorer_current_file.toStdString() << std::endl;
 
-    QString command = "rm -rf " + Explorer::explorer_current_file;
+    if (Explorer::explorer_current_file.isEmpty()) return;
 
-    dialog_window->set_title_text(Translator::current_language_data_set[6]);
-    dialog_window->set_data_text(QFileInfo(Explorer::explorer_current_file).fileName());
-    dialog_window->set_cancel_btn_text(Translator::current_language_data_set[7]);
-    dialog_window->set_ok_btn_text(Translator::current_language_data_set[8]);
-    dialog_window->set_locate(parent->width(), parent->height());
-    dialog_window->set_slot([=] () {
+    if (!(QFile::exists(Explorer::explorer_current_file)))
+    {
+        fill_already_deleted_message(Translator::current_language_data_set[20], Translator::current_language_data_set[21], Translator::current_language_data_set[22]
+        , Translator::current_language_data_set[23], [=] () {
+
+            refresh_click();
+            dialog_window->hide_widget();
+        });
+
+        return;
+    }
+
+    fill_already_deleted_message(Translator::current_language_data_set[6], QFileInfo(Explorer::explorer_current_file).fileName(), Translator::current_language_data_set[7]
+    , Translator::current_language_data_set[8], [=] () {
+
+        QString command = "rm -rf " + Explorer::explorer_current_file;
         std::system(command.toStdString().c_str());
-        dialog_window->hide();
-    });
 
-    dialog_window->show();
+        dialog_window->hide_widget();
+    });
 }
 
 void PanelTools::open_dir_click()
@@ -127,7 +136,7 @@ void PanelTools::open_dir_click()
 
 void PanelTools::refresh_click()
 {
-    if (Explorer::explorer_directory == "") return;
+    if (Explorer::explorer_directory.isEmpty()) return;
 
     std::vector<QString> items;
 
@@ -139,4 +148,15 @@ void PanelTools::refresh_click()
 void PanelTools::set_dialog_window_ptr(DialogWindow* dialog_window)
 {
     this->dialog_window = dialog_window;
+}
+
+void PanelTools::fill_already_deleted_message(const QString& text_1, const QString& text_2, const QString& text_3, const QString& text_4, std::function<void()> slot)
+{
+    dialog_window->set_title_text(text_1);
+    dialog_window->set_data_text(text_2);
+    dialog_window->set_cancel_btn_text(text_3);
+    dialog_window->set_ok_btn_text(text_4);
+    dialog_window->set_locate(parent->width(), parent->height());
+    dialog_window->set_slot(slot);
+    dialog_window->show_widget();
 }

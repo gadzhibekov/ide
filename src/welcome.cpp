@@ -7,11 +7,10 @@
 
 #include <QObject>
 #include <QUrl>
-#include <QMessageBox>
 #include <QFileDialog>
 #include <QDesktopServices>
 
-Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent)
+Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent), parent(parent)
 {
     this->setGeometry(300, 0, width - 300, height);
     this->setStyleSheet("background-color: black;");
@@ -92,21 +91,21 @@ void Welcome::translate_to_leki_slot()
 {
     Translator::current_language = "leki";
 
-    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[15] + Translator::current_language_data_set[18]);
+    fill_change_language_message(Translator::current_language_data_set[15]);
 }
 
 void Welcome::translate_to_ru_slot()
 {
     Translator::current_language = "ru";
 
-    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[16] + Translator::current_language_data_set[18]);
+    fill_change_language_message(Translator::current_language_data_set[16]);
 }
 
 void Welcome::translate_to_en_slot()
 {
     Translator::current_language = "en";
 
-    QMessageBox::information(nullptr, "", Translator::current_language_data_set[10] + Translator::current_language_data_set[17] + Translator::current_language_data_set[18]);
+    fill_change_language_message(Translator::current_language_data_set[17]);
 }
 
 void Welcome::open_dir_prototype_slot()
@@ -132,4 +131,15 @@ void Welcome::open_github_link_slot()
 void Welcome::open_tg_link_slot()
 {
     QDesktopServices::openUrl(QUrl(TG_LINK));
+}
+
+void Welcome::fill_change_language_message(const QString& current_language)
+{
+    dialog_window->set_title_text(Translator::current_language_data_set[19]);
+    dialog_window->set_data_text(Translator::current_language_data_set[10] + current_language + Translator::current_language_data_set[18]);
+    dialog_window->set_data_text_size(10);
+    dialog_window->set_cancel_btn_text(Translator::current_language_data_set[14]);
+    dialog_window->set_locate(parent->width(), parent->height());
+    dialog_window->set_slot(nullptr);
+    dialog_window->show_widget();
 }

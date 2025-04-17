@@ -21,6 +21,9 @@ struct DialogWindow : QWidget
     void                        set_cancel_btn_text(const QString& text);
     void                        set_locate(int x, int y);
 
+    void                        show_widget();
+    void                        hide_widget();
+
 private:
     Label*                      title;
     Label*                      data;

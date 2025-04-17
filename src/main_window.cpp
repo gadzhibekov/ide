@@ -23,11 +23,12 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setCentralWidget(central_widget);
     this->setMinimumSize(MINIMUM_MAIN_WINDOW_WIDTH, MINIMUM_MAIN_WINDOW_HEIGHT);
     this->setWindowTitle(MAIN_WINDOW_TITLE);
-
+    
     welcome         = new Welcome(central_widget, this->width(), this->height());
     panel           = new Panel(central_widget, MINIMUM_MAIN_WINDOW_WIDTH / 4, this->height());
     panel_tools     = new PanelTools(central_widget, this, panel, welcome, this->width() / 4);
     dialog_window   = new DialogWindow(central_widget, this->width(), this->height());
+
 
     panel_tools->set_dialog_window_ptr(dialog_window);
     welcome->set_dialog_window_ptr(dialog_window);
@@ -54,10 +55,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
             Explorer::get_directory(config_data.last_project_dir, items);
             Explorer::load_directory(panel, panel_tools, welcome, items);
 
-            dialog_window->hide();
+            dialog_window->hide_widget();
         });
 
-        dialog_window->show();
+        dialog_window->show_widget();
     }
 }
 

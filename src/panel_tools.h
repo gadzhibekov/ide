@@ -22,6 +22,8 @@
 #include <QWidget>
 #include <QString>
 
+#include <functional>
+
 struct MainWindow;
 struct Welcome;
 
@@ -55,6 +57,7 @@ private:
     void                right_regulate_click();
 
     void                regulate_panels(int width);
+    void                fill_already_deleted_message(const QString& text_1, const QString& text_2, const QString& text_3, const QString& text_4, std::function<void()> slot);
 };
 
 #endif // PANEL_TOOLS_H

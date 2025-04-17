@@ -32,20 +32,11 @@ struct Welcome : QWidget
     void            set_panel_tools_ptr(PanelTools* panel_tools);
     void            set_panel_ptr(Panel* panel);
 
-    Label*          get_welcome_text_1()        const   { return this->welcome_text_1;      }
-    Label*          get_welcome_text_2()        const   { return this->welcome_text_2;      }
-    Button*         get_open_dir_prototype()    const   { return this->open_dir_prototype;  }
-    Button*         get_translate_to_leki()     const   { return this->translate_to_leki;   }
-    Button*         get_translate_to_ru()       const   { return this->translate_to_ru;     }
-    Button*         get_translate_to_en()       const   { return this->translate_to_en;     }
-    Button*         get_github_link()           const   { return this->github_link;         }
-    Button*         get_tg_link()               const   { return this->tg_link;             }
-    Player*         get_player()                const   { return this->player;              }
-
 protected:
     void            resizeEvent(QResizeEvent* event)   override;
 
 private:
+    QWidget*        parent;
     Player*         player;
     DialogWindow*   dialog_window;
     PanelTools*     panel_tools;
@@ -65,6 +56,7 @@ private:
     void            open_dir_prototype_slot();
     void            open_github_link_slot();
     void            open_tg_link_slot();
+    void            fill_change_language_message(const QString& current_language);
 };
 
 #endif // WELCOME

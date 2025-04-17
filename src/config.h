@@ -1,6 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#define CONFIG_FILE_NAME "/ide_configuration.json"
+
 #include <QStandardPaths>
 #include <QString>
 
