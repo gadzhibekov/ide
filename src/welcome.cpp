@@ -89,21 +89,21 @@ void Welcome::set_panel_ptr(Panel* panel)
 
 void Welcome::translate_to_leki_slot()
 {
-    Translator::current_language = "leki";
+    Translator::current_language = LEKI;
 
     fill_change_language_message(Translator::current_language_data_set[15]);
 }
 
 void Welcome::translate_to_ru_slot()
 {
-    Translator::current_language = "ru";
+    Translator::current_language = RU;
 
     fill_change_language_message(Translator::current_language_data_set[16]);
 }
 
 void Welcome::translate_to_en_slot()
 {
-    Translator::current_language = "en";
+    Translator::current_language = EN;
 
     fill_change_language_message(Translator::current_language_data_set[17]);
 }

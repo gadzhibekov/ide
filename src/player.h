@@ -12,9 +12,8 @@ struct Player : QWidget
 
     void            set_geometry(int x, int y, int w, int h);
 
-    QString         get_video_path()    const   { return this->video_path;      }
-    QMediaPlayer*   get_video_player()  const   { return this->video_player;    }
-    QVideoWidget*   get_video_widget()  const   { return this->video_widget;    }
+private slots:
+    void            on_media_status_changed(QMediaPlayer::MediaStatus status);
 
 private:
     QString         video_path;

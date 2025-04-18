@@ -38,10 +38,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     if (!config_data.last_project_dir.isEmpty())
     {
         dialog_window->set_title_text(Translator::current_language_data_set[3]);
-
-        if (config_data.language == "leki")         dialog_window->set_title_text_size(10);
-        else                                        dialog_window->set_title_text_size(12);
-
+        dialog_window->set_title_text_size(12);
         dialog_window->set_data_text(config_data.last_project_dir);
         dialog_window->set_data_text_size(10);
         dialog_window->set_cancel_btn_text(Translator::current_language_data_set[4]);

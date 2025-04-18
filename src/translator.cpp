@@ -1,4 +1,5 @@
 #include "translator.h"
+#include "config.h"
 
 QString                     Translator::current_language            = "";
 std::vector<QString>        Translator::current_language_data_set;
@@ -12,7 +13,7 @@ Translator::Translator(const QString& language)
         "Кнопкадал элис",
         "директория ахъагъун патал",
         "ПРОВОДНИК:",
-        "Эхиримжи директория загрузка айидан ?",
+        "Эхиримжи директория загрузка\nайидан ?",
         "Ваъ, ийимир",
         "Загрузка ая",
         "Файл чlурдан ?",
@@ -91,7 +92,7 @@ Translator::Translator(const QString& language)
         "Refresh"
     };
 
-    if (language == "ru")       current_language_data_set = ru_data_set;
-    if (language == "en")       current_language_data_set = en_data_set;
-    if (language == "leki")     current_language_data_set = leki_data_set;
+    if (language == RU)       current_language_data_set = ru_data_set;
+    if (language == EN)       current_language_data_set = en_data_set;
+    if (language == LEKI)     current_language_data_set = leki_data_set;
 }

@@ -1,7 +1,11 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define CONFIG_FILE_NAME "/ide_configuration.json"
+#define STANDART_TEMP_DIR   QStandardPaths::writableLocation(QStandardPaths::TempLocation)
+#define CONFIG_FILE_NAME    "/ide_configuration.json"
+#define LEKI                "leki"
+#define RU                  "ru"
+#define EN                  "en"
 
 #include <QStandardPaths>
 #include <QString>
@@ -20,7 +24,6 @@ struct Config
 {
     static  void                write(ConfigData&& config_data);
     static  ConfigData          read();
-    static  QString             get_standart_temp_path();
 };
 
 #endif // CONFIG_H
