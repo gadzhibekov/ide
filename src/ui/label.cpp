@@ -4,6 +4,7 @@
 #include <QPixmap>
 #include <QColor>
 #include <QPalette>
+#include <QFile>
 
 Label::Label(QWidget* parent) : QLabel(parent)
 {
@@ -48,4 +49,14 @@ void Label::set_text_color(int red, int green, int blue)
     QColor customColor(red, green, blue);
     palette.setColor(QPalette::WindowText, customColor);
     this->setPalette(palette);
+}
+
+void Label::set_style(const QString& css_file_path)
+{
+    QFile file(css_file_path);
+	file.open(QIODevice::ReadOnly);
+	QString data = file.readAll();
+	file.close();
+
+    this->setStyleSheet(data);
 }

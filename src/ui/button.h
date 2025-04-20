@@ -20,6 +20,7 @@ struct Button : QPushButton
     void                        set_opacity(double opacity);
     void                        set_geometry(int x, int y, int w, int h);
     void                        set_icon_size(int width, int height);
+    void                        set_style(const QString& css_file_path);
     void                        set_enter_slot(std::function<void()> slot);
     void                        set_leave_slot(std::function<void()> slot);
 

@@ -2,6 +2,7 @@
 
 #include "explorer.h"
 #include "translator.h"
+#include "../styles/styles.h"
 
 #include <QCoreApplication>
 #include <QFileDialog>
@@ -14,15 +15,17 @@
 #include <cstdlib>
 
 PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width) 
-: QWidget(parent), parent(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
+: Widget(parent), parent(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
 {
-    this->setStyleSheet("background-color: black;");
+    this->set_style(PANEL_TOOLS_STYLE_PATH);
 
     right_regulator = new Button(this, [&](){right_regulate_click();});
     right_regulator->set_icon(RIGHT_ICON_PATH);
+    right_regulator->set_style(PANEL_TOOLS_BUTTON_STYLE_PATH);
 
     left_regulator = new Button(this, [&](){left_regulate_click();});
     left_regulator->set_icon(LEFT_ICON_PATH);
+    left_regulator->set_style(PANEL_TOOLS_BUTTON_STYLE_PATH);
 
     remove_item = new Button(this, [&](){remove_item_click();});
     remove_item->set_icon(DELETE_ICON_PATH);
@@ -31,17 +34,21 @@ PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, W
                                       remove_item->set_icon_size(20, 20);});
     remove_item->set_leave_slot([=](){remove_item->set_icon(DELETE_ICON_PATH);
                                       remove_item->set_icon_size(20, 20);});
+    remove_item->set_style(PANEL_TOOLS_BUTTON_STYLE_PATH);
 
     refresh = new Button(this, [&](){refresh_click();});
     refresh->set_icon(REFERSH_ICON_PATH);
+    refresh->set_style(PANEL_TOOLS_BUTTON_STYLE_PATH);
 
     open_dir = new Button(this, [&](){open_dir_click();});
     open_dir->set_icon(OPEN_DIRECTORY_ICON_PATH);
     open_dir->set_icon_size(18, 18);
+    open_dir->set_style(PANEL_TOOLS_BUTTON_STYLE_PATH);
 
     explorer_path = new Label(this);
     explorer_path->set_text(Translator::current_language_data_set[2]);
     explorer_path->set_text_color(255, 255, 255);
+    explorer_path->set_style(PANEL_TOOLS_LABEL_STYLE_PATH);
 
     regulate_panels(width);
 }

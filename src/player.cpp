@@ -6,7 +6,7 @@
 #include <QUrl>
 
 Player::Player(QWidget* parent, const QString& video_path) 
-    : QWidget(parent),
+    : Widget(parent),
       video_path(video_path),
       video_player(new QMediaPlayer(this)),
       video_widget(new QVideoWidget(this))
@@ -18,6 +18,7 @@ Player::Player(QWidget* parent, const QString& video_path)
     setLayout(layout);
 
     video_player->setMedia(QUrl::fromLocalFile(QFileInfo(video_path).absoluteFilePath()));
+    video_player->setVolume(0);
 
     QObject::connect(video_player, &QMediaPlayer::mediaStatusChanged, this, &Player::on_media_status_changed);
 

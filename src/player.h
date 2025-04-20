@@ -1,12 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "ui/widget.h"
+
 #include <QWidget>
 #include <QString>
 #include <QMediaPlayer>
 #include <QVideoWidget>
 
-struct Player : QWidget 
+struct Player : Widget 
 {
     Player(QWidget* parent, const QString& video_path);
 

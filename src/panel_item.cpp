@@ -1,15 +1,14 @@
 #include "panel_item.h"
 
 #include "explorer.h"
+#include "../styles/styles.h"
 
 #include <QFile>
 
 #include <iostream>
 
-PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) : QWidget(parent)
+PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) : Widget(parent)
 {
-    this->setStyleSheet("background-color: black;");
-
     icon    = new Label(this);
     file    = new Label(this);
 
@@ -18,6 +17,9 @@ PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) 
 
     icon->set_text_color(255, 255, 255);
     file->set_text_color(255, 255, 255);
+
+    icon->set_style(PANEL_TOOLS_ITEM_LABEL_STYLE_PATH);
+    file->set_style(PANEL_TOOLS_ITEM_LABEL_STYLE_PATH);
     
     x = 0;
     y = panel_elements_size * PANEL_ITEM_SIZE;
@@ -25,12 +27,12 @@ PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) 
     h = PANEL_ITEM_SIZE;
 
     this->setGeometry(x, y, w * 1000, h);
-    icon->setGeometry(0, 5, h, h);
-    file->setGeometry(h, 0, (w - h) * 1000, h);
+    icon->setGeometry(5, 5, h, h - 5);
+    file->setGeometry(h, 5, (w - h) * 1000, h - 10);
 
+    this->set_style(PANEL_TOOLS_ITEM_STYLE_PATH);
     this->hide();
 }
-
 
 void PanelItem::set_file(const QString& path)
 {
@@ -68,29 +70,31 @@ void PanelItem::mousePressEvent(QMouseEvent* event)
 
 void PanelItem::mouseDoubleClickEvent(QMouseEvent* event)
 {
+    this->set_style(PANEL_TOOLS_ITEM_DOBLE_CLICK_STYLE_PATH);
+
     QFile current_file(file->text());
 
     if (current_file.open(QIODevice::ReadOnly | QIODevice::Text)) 
     {
         Explorer::explorer_current_file_data = current_file.readAll();
         current_file.close();
-    }
 
-    std::cout << Explorer::explorer_current_file_data.toStdString() << std::endl;
+        std::cout << Explorer::explorer_current_file_data.toStdString() << std::endl;
+    }
 
     QWidget::mouseDoubleClickEvent(event); 
 }
 
 void PanelItem::enterEvent(QEvent* event)
 {
-    std::cout << "Enter: " << file->text().toStdString() << std::endl;
+    this->set_style(PANEL_TOOLS_ITEM_CLICK_STYLE_PATH);
 
     QWidget::enterEvent(event);
 }
 
 void PanelItem::leaveEvent(QEvent* event) 
 {
-    std::cout << "Leave: " << file->text().toStdString() << std::endl;
+    this->set_style(PANEL_TOOLS_ITEM_STYLE_PATH);
 
     QWidget::leaveEvent(event);
 }

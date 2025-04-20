@@ -1,13 +1,14 @@
 #include "dialog_window.h"
 
 #include "../translator.h"
+#include "../../styles/styles.h"
 
 #include <QObject>
 
-DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(parent)
+DialogWindow::DialogWindow(QWidget* parent, int width, int height) : Widget(parent)
 {
     this->setGeometry(width / 2 - 150, height / 2 - 100, 300, 200);
-    this->setStyleSheet("background-color: grey;");
+    this->set_style(DIALOG_WINDOW_STYLE_PATH);
 
     title = new Label(this);
     title->set_geometry(20, 20, 260, 40);
@@ -21,12 +22,13 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
 
     ok = new Button(this);
     ok->set_geometry(this->width() / 2, 150, this->width() / 2, 50);
+    ok->set_style(DIALOG_WINDOW_BUTTON_RIGHT_STYLE_PATH);
 
     cancel = new Button(this);
     cancel->set_geometry(0, 150, this->width() / 2, 50);
     cancel->set_text(Translator::current_language_data_set[7]);
-
     cancel->set_text(Translator::current_language_data_set[14]);
+    cancel->set_style(DIALOG_WINDOW_BUTTON_LEFT_STYLE_PATH);
 
     QObject::connect(cancel, &Button::clicked, this, &DialogWindow::click_cancel);
 
@@ -35,6 +37,17 @@ DialogWindow::DialogWindow(QWidget* parent, int width, int height) : QWidget(par
 
 void DialogWindow::set_slot(std::function<void()> slot)
 {
+    if (slot)
+    {
+        ok->set_style(DIALOG_WINDOW_BUTTON_RIGHT_STYLE_PATH);
+        cancel->set_style(DIALOG_WINDOW_BUTTON_LEFT_STYLE_PATH);
+    }
+    else
+    {
+        ok->set_style(DIALOG_WINDOW_BUTTON_COMMON_STYLE_PATH);
+        cancel->set_style(DIALOG_WINDOW_BUTTON_COMMON_STYLE_PATH);
+    }
+
     this->slot = slot;
     QObject::connect(ok, &Button::clicked, this, &DialogWindow::click_ok);
 }

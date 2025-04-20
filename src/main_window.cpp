@@ -4,6 +4,7 @@
 #include "explorer.h"
 #include "config.h"
 #include "translator.h"
+#include "../styles/styles.h"
 
 #include <QString>
 #include <QDebug>
@@ -28,7 +29,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     panel           = new Panel(central_widget, MINIMUM_MAIN_WINDOW_WIDTH / 4, this->height());
     panel_tools     = new PanelTools(central_widget, this, panel, welcome, this->width() / 4);
     dialog_window   = new DialogWindow(central_widget, this->width(), this->height());
-
 
     panel_tools->set_dialog_window_ptr(dialog_window);
     welcome->set_dialog_window_ptr(dialog_window);

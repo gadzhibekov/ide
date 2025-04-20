@@ -5,6 +5,7 @@
 #include <QSize>
 #include <QPalette>
 #include <QColor>
+#include <QFile>
 
 Button::Button(QWidget* parent) : QPushButton(parent)
 {
@@ -65,6 +66,16 @@ void Button::set_opacity(double opacity)
 void Button::set_geometry(int x, int y, int w, int h)
 {
     this->setGeometry(x, y, w, h);
+}
+
+void Button::set_style(const QString& css_file_path)
+{
+    QFile file(css_file_path);
+	file.open(QIODevice::ReadOnly);
+	QString data = file.readAll();
+	file.close();
+
+    this->setStyleSheet(data);
 }
 
 void Button::enterEvent(QEvent *event)

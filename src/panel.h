@@ -3,6 +3,7 @@
 
 #include "panel_item.h"
 #include "ui/button.h"
+#include "ui/widget.h"
 
 #include <QWidget>
 #include <QEvent>
@@ -10,7 +11,7 @@
 
 #include <vector>
 
-struct Panel : QWidget
+struct Panel : Widget
 {
     Panel(QWidget* parent, int width, int height);
 

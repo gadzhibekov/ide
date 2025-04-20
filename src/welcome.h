@@ -13,6 +13,7 @@
 #include "ui/button.h"
 #include "ui/label.h"
 #include "ui/dialog_window.h"
+#include "ui/widget.h"
 #include "player.h"
 #include "panel_tools.h"
 #include "panel.h"
@@ -23,7 +24,7 @@
 
 struct PanelTools;
 
-struct Welcome : QWidget
+struct Welcome : Widget
 {
     Welcome(QWidget* parent, int width, int height);
 

@@ -25,9 +25,11 @@ set(SOURCES
     src/ui/label.cpp
     src/ui/button.cpp
     src/ui/dialog_window.cpp
+    src/ui/widget.cpp
 )
 
 set(HEADERS
+    styles/styles.h
     src/main_window.h
     src/panel.h
     src/panel_item.h
@@ -40,6 +42,7 @@ set(HEADERS
     src/ui/label.h
     src/ui/button.h
     src/ui/dialog_window.h
+    src/ui/widget.h
 )
 
 message(STATUS "Qt5 Core version: ${Qt5Core_VERSION}")

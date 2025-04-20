@@ -1,0 +1,14 @@
+QPushButton {
+    background-color: #1d1d1d;
+    border: 1px solid rgb(34, 34, 34);
+    border-radius: 0; /* Отключаем общее округление */
+    border-top-left-radius: 0px; /* Угол сверху слева */
+    border-top-right-radius: 0px; /* Угол сверху справа */
+    border-bottom-left-radius: 20px; /* Угол снизу слева */
+    border-bottom-right-radius: 0px; /* Угол снизу справа */
+    color: white;
+}
+
+QPushButton:pressed {
+    background-color: #383844;
+}

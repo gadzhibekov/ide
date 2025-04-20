@@ -15,6 +15,7 @@
 #include "ui/button.h"
 #include "ui/label.h"
 #include "ui/dialog_window.h"
+#include "ui/widget.h"
 #include "main_window.h"
 #include "panel.h"
 #include "welcome.h"
@@ -27,7 +28,7 @@
 struct MainWindow;
 struct Welcome;
 
-struct PanelTools : QWidget
+struct PanelTools : Widget
 {
     PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width);
     

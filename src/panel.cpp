@@ -2,10 +2,9 @@
 
 #include <iostream>
 
-Panel::Panel(QWidget* parent, int width, int height) : QWidget(parent), width(width), height(height)
+Panel::Panel(QWidget* parent, int width, int height) : Widget(parent), width(width), height(height)
 {
     this->setGeometry(0, 20, width, height);
-    this->setStyleSheet("background-color: black;");
 }
 
 void Panel::add_item(PanelItem* panel_item)

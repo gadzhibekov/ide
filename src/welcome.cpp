@@ -4,16 +4,16 @@
 #include "translator.h"
 #include "explorer.h"
 #include "config.h"
+#include "../styles/styles.h"
 
 #include <QObject>
 #include <QUrl>
 #include <QFileDialog>
 #include <QDesktopServices>
 
-Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent), parent(parent)
+Welcome::Welcome(QWidget* parent, int width, int height) : Widget(parent), parent(parent)
 {
     this->setGeometry(300, 0, width - 300, height);
-    this->setStyleSheet("background-color: black;");
 
     welcome_text_1 = new Label(this);
     welcome_text_1->set_text_size(15);
@@ -22,6 +22,7 @@ Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent), pare
 
     open_dir_prototype = new Button(this, [=](){open_dir_prototype_slot();});
     open_dir_prototype->set_icon(OPEN_DIRECTORY_ICON_PATH);
+    open_dir_prototype->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     welcome_text_2 = new Label(this);
     welcome_text_2->set_text_size(15);
@@ -31,24 +32,30 @@ Welcome::Welcome(QWidget* parent, int width, int height) : QWidget(parent), pare
     translate_to_leki = new Button(this, [=](){translate_to_leki_slot();});
     translate_to_leki->set_icon(LEKI_FLAG_PATH);
     translate_to_leki->set_icon_size(50, 25);
+    translate_to_leki->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     translate_to_ru = new Button(this, [=](){translate_to_ru_slot();});
     translate_to_ru->set_icon(RU_FLAG_PATH);
     translate_to_ru->set_icon_size(78, 35);
+    translate_to_ru->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     translate_to_en = new Button(this, [=](){translate_to_en_slot();});
     translate_to_en->set_icon(US_FLAG_PATH);
     translate_to_en->set_icon_size(78, 35);
+    translate_to_en->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     github_link = new Button(this, [=](){open_github_link_slot();});
     github_link->set_icon(GITHUB_ICON_PATH);
     github_link->set_icon_size(25, 25);
+    github_link->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     tg_link = new Button(this, [=](){open_tg_link_slot();});
     tg_link->set_icon(TG_ICON_PATH);
     tg_link->set_icon_size(25, 25);
+    tg_link->set_style(WELCOME_WINDOW_STYLE_PATH);
 
     player = new Player(this, FLOWERS_ANIM_PATH);
+    player->set_style(WIDGET_STYLE_PATH);
 }
 
 void Welcome::resizeEvent(QResizeEvent* event)

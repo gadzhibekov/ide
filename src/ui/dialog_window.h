@@ -3,12 +3,13 @@
 
 #include "button.h"
 #include "label.h"
+#include "widget.h"
 
 #include <QWidget>
 
 #include <functional>
 
-struct DialogWindow : QWidget
+struct DialogWindow : Widget
 {
     DialogWindow(QWidget* parent, int width, int height);
 

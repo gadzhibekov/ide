@@ -6,6 +6,7 @@
 
 #include "ui/label.h"
 #include "ui/button.h"
+#include "ui/widget.h"
 
 #include <QWidget>
 #include <QLabel>
@@ -13,33 +14,33 @@
 #include <QEvent>
 #include <QMouseEvent>
 
-struct PanelItem : QWidget
+struct PanelItem : Widget
 {
     PanelItem(QWidget* parent, int panel_width, int panel_elements_size);
 
-    void        set_file(const QString& path);
-    void        set_geometry(int x, int y, int w, int h);
+    void            set_file(const QString& path);
+    void            set_geometry(int x, int y, int w, int h);
 
-    Label*      get_icon()   const   { return this->icon; }
-    Label*      get_file()   const   { return this->file; }
+    Label*          get_icon()   const   { return this->icon; }
+    Label*          get_file()   const   { return this->file; }
 
-    void        scroll_up();
-    void        scroll_down();
+    void            scroll_up();
+    void            scroll_down();
 
-    int         x;
-    int         y;
-    int         w;
-    int         h;
+    int             x;
+    int             y;
+    int             w;
+    int             h;
 
 protected:
-    void        mousePressEvent(QMouseEvent* event)         override;
-    void        mouseDoubleClickEvent(QMouseEvent *event)   override;
-    void        enterEvent(QEvent *event)                   override;
-    void        leaveEvent(QEvent *event)                   override;
+    void            mousePressEvent(QMouseEvent* event)         override;
+    void            mouseDoubleClickEvent(QMouseEvent *event)   override;
+    void            enterEvent(QEvent *event)                   override;
+    void            leaveEvent(QEvent *event)                   override;
 
 private:
-    Label*      icon;
-    Label*      file;
+    Label*          icon;
+    Label*          file;
 };
 
 #endif // PANEL_ITEM_H
