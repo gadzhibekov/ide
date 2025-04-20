@@ -46,8 +46,8 @@ void Label::set_icon_size(int width, int height)
 void Label::set_text_color(int red, int green, int blue)
 {
     QPalette palette = this->palette();
-    QColor customColor(red, green, blue);
-    palette.setColor(QPalette::WindowText, customColor);
+    QColor custom_color(red, green, blue);
+    palette.setColor(QPalette::WindowText, custom_color);
     this->setPalette(palette);
 }
 

@@ -28,7 +28,6 @@ struct Welcome : Widget
 {
     Welcome(QWidget* parent, int width, int height);
 
-    void            set_geometry(int x, int y, int w, int h);
     void            set_dialog_window_ptr(DialogWindow* dialog_window);
     void            set_panel_tools_ptr(PanelTools* panel_tools);
     void            set_panel_ptr(Panel* panel);

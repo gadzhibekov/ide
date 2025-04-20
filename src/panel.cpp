@@ -4,7 +4,7 @@
 
 Panel::Panel(QWidget* parent, int width, int height) : Widget(parent), width(width), height(height)
 {
-    this->setGeometry(0, 20, width, height);
+    this->set_geometry(0, 20, width, height);
 }
 
 void Panel::add_item(PanelItem* panel_item)

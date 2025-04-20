@@ -26,7 +26,7 @@ PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) 
     w = panel_width;
     h = PANEL_ITEM_SIZE;
 
-    this->setGeometry(x, y, w * 1000, h);
+    this->set_geometry(x, y, w * 1000, h);
     icon->setGeometry(5, 5, h, h - 5);
     file->setGeometry(h, 5, (w - h) * 1000, h - 10);
 
@@ -53,9 +53,9 @@ void PanelItem::scroll_down()
     this->setGeometry(0, y, w, h);
 }
 
-void PanelItem::set_geometry(int x, int y, int w, int h)
+void PanelItem::set_panel_items_vector(std::vector<PanelItem *>& items)
 {
-    this->setGeometry(x, y, w, h);
+    this->items = items;
 }
 
 void PanelItem::mousePressEvent(QMouseEvent* event)
@@ -70,6 +70,8 @@ void PanelItem::mousePressEvent(QMouseEvent* event)
 
 void PanelItem::mouseDoubleClickEvent(QMouseEvent* event)
 {
+    update_items_style();
+    Explorer::explorer_current_file = file->text();
     this->set_style(PANEL_TOOLS_ITEM_DOBLE_CLICK_STYLE_PATH);
 
     QFile current_file(file->text());
@@ -94,7 +96,22 @@ void PanelItem::enterEvent(QEvent* event)
 
 void PanelItem::leaveEvent(QEvent* event) 
 {
-    this->set_style(PANEL_TOOLS_ITEM_STYLE_PATH);
+    if (Explorer::explorer_current_file == file->get_text())
+    {
+        this->set_style(PANEL_TOOLS_ITEM_DOBLE_CLICK_STYLE_PATH);
+    }
+    else
+    {
+        this->set_style(PANEL_TOOLS_ITEM_STYLE_PATH);
+    }
 
     QWidget::leaveEvent(event);
+}
+
+void PanelItem::update_items_style()
+{
+    for (int i = 0; i < items.size(); ++i)
+    {
+        items[i]->set_style(PANEL_TOOLS_ITEM_STYLE_PATH);
+    }
 }

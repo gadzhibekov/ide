@@ -8,6 +8,7 @@
 #include "panel.h"
 #include "panel_tools.h"
 #include "welcome.h"
+#include "redactor.h"
 #include "ui/dialog_window.h"
 
 #include <QMainWindow>
@@ -31,6 +32,7 @@ private:
     Panel*          panel;
     PanelTools*     panel_tools;
     Welcome*        welcome;
+    Redactor*       redactor;
 };
 
 #endif // MAIN_WINDOW_H

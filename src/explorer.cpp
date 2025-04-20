@@ -61,6 +61,11 @@ void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, Welcome* we
         panel->add_item(panel_item);
     }
 
+    for (int i = 0; i < panel->get_items_vector().size(); ++i)
+    {
+        panel->get_items_vector()[i]->set_panel_items_vector(panel->get_items_vector());
+    }
+    
     panel_tools->set_explorer_path(Explorer::explorer_directory);
     welcome->hide();
 }

@@ -78,6 +78,14 @@ void Button::set_style(const QString& css_file_path)
     this->setStyleSheet(data);
 }
 
+void Button::set_text_color(int red, int green, int blue)
+{
+    QPalette palette = this->palette();
+    QColor custom_color(red, green, blue);
+    palette.setColor(QPalette::ButtonText, custom_color);
+    this->setPalette(palette);
+}
+
 void Button::enterEvent(QEvent *event)
 {
     enter();

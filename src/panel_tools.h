@@ -27,12 +27,13 @@
 
 struct MainWindow;
 struct Welcome;
+struct Redactor;
 
 struct PanelTools : Widget
 {
-    PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width);
+    PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, Redactor* redactor, int width);
     
-    void                set_geometry(int x, int y, int w, int h);
+    void                set_geometry(int x, int y, int w, int h) override;
     void                set_explorer_path(const QString& path);
     void                set_dialog_window_ptr(DialogWindow* dialog_window);
 
@@ -50,6 +51,7 @@ private:
     DialogWindow*       dialog_window;
     MainWindow*         main_window;
     Welcome*            welcome;
+    Redactor*           redactor;
 
     void                open_dir_click();
     void                refresh_click();

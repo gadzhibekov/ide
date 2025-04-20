@@ -12,8 +12,6 @@ struct Player : Widget
 {
     Player(QWidget* parent, const QString& video_path);
 
-    void            set_geometry(int x, int y, int w, int h);
-
 private slots:
     void            on_media_status_changed(QMediaPlayer::MediaStatus status);
 

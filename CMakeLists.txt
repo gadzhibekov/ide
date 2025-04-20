@@ -22,10 +22,13 @@ set(SOURCES
     src/player.cpp
     src/config.cpp
     src/translator.cpp
+    src/redactor.cpp
+    src/redactor_item.cpp
     src/ui/label.cpp
     src/ui/button.cpp
     src/ui/dialog_window.cpp
     src/ui/widget.cpp
+    src/ui/line_edit.cpp
 )
 
 set(HEADERS
@@ -39,10 +42,13 @@ set(HEADERS
     src/player.h
     src/config.h
     src/translator.h
+    src/redactor.h
+    src/redactor_item.h
     src/ui/label.h
     src/ui/button.h
     src/ui/dialog_window.h
     src/ui/widget.h
+    src/ui/line_edit.h
 )
 
 message(STATUS "Qt5 Core version: ${Qt5Core_VERSION}")

@@ -14,8 +14,8 @@
 #include <vector>
 #include <cstdlib>
 
-PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, int width) 
-: Widget(parent), parent(parent), main_window(main_window), panel(panel), welcome(welcome), width(width)
+PanelTools::PanelTools(QWidget* parent, MainWindow* main_window, Panel* panel, Welcome* welcome, Redactor* redactor, int width) 
+: Widget(parent), parent(parent), main_window(main_window), panel(panel), welcome(welcome), redactor(redactor), width(width)
 {
     this->set_style(PANEL_TOOLS_STYLE_PATH);
 
@@ -96,6 +96,7 @@ void PanelTools::regulate_panels(int width)
 
     panel->set_geometry(0, 20, width, panel->height);
     welcome->set_geometry(panel->width, 0, main_window->width() - panel->width, main_window->height());
+    redactor->set_geometry(panel->width, 0, main_window->width() - panel->width, main_window->height());
 }
 
 void PanelTools::remove_item_click()

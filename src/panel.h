@@ -16,15 +16,15 @@ struct Panel : Widget
     Panel(QWidget* parent, int width, int height);
 
     void                        add_item(PanelItem* panel_item);
-    void                        set_geometry(int x, int y, int w, int h);
+    void                        set_geometry(int x, int y, int w, int h)                override;
     void                        remove_all();
     int                         elements_size() const { return this->items.size(); }
-    std::vector<PanelItem *>    get_items_vector() const { return this->items; }
+    std::vector<PanelItem *>&   get_items_vector() { return this->items; }
     int                         width;
     int                         height;
 
 protected:
-    void                        wheelEvent(QWheelEvent* event) override;
+    void                        wheelEvent(QWheelEvent* event)                          override;
 
     
 private:

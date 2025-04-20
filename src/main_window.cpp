@@ -1,6 +1,7 @@
 #include "main_window.h"
 
 #include "panel_item.h"
+#include "redactor_item.h"
 #include "explorer.h"
 #include "config.h"
 #include "translator.h"
@@ -25,15 +26,28 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setMinimumSize(MINIMUM_MAIN_WINDOW_WIDTH, MINIMUM_MAIN_WINDOW_HEIGHT);
     this->setWindowTitle(MAIN_WINDOW_TITLE);
     
+    redactor        = new Redactor(central_widget, this->width(), this->height());
     welcome         = new Welcome(central_widget, this->width(), this->height());
     panel           = new Panel(central_widget, MINIMUM_MAIN_WINDOW_WIDTH / 4, this->height());
-    panel_tools     = new PanelTools(central_widget, this, panel, welcome, this->width() / 4);
+    panel_tools     = new PanelTools(central_widget, this, panel, welcome, redactor, this->width() / 4);
     dialog_window   = new DialogWindow(central_widget, this->width(), this->height());
 
     panel_tools->set_dialog_window_ptr(dialog_window);
     welcome->set_dialog_window_ptr(dialog_window);
     welcome->set_panel_tools_ptr(panel_tools);
     welcome->set_panel_ptr(panel);
+
+
+    for (int i = 0; i < 10; ++i)
+    {
+        RedactorItem* ri = new RedactorItem(redactor, redactor->width(), redactor->get_items_vector().size());
+
+        ri->set_index(static_cast<unsigned int>(i + 1));
+        ri->set_line("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+
+        redactor->add_item(ri);
+    }
+
 
     if (!config_data.last_project_dir.isEmpty())
     {
@@ -69,4 +83,5 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     panel->set_geometry(0, 20, panel->width, this->height());
     panel_tools->set_geometry(0, 0, panel_tools->width, 20);
     welcome->set_geometry(panel->width, 0, this->width() - panel->width, this->height());
+    redactor->set_geometry(panel->width, 0, this->width() - panel->width, this->height());
 }

@@ -34,8 +34,3 @@ void Player::on_media_status_changed(QMediaPlayer::MediaStatus status)
         video_player->play();
     }
 }
-
-void Player::set_geometry(int x, int y, int w, int h)
-{
-    this->setGeometry(x, y, w, h);
-}
