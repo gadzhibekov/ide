@@ -6,9 +6,9 @@
 #include <QDebug>
 #include <QMessageBox>
 
-QString Explorer::explorer_directory            = "";
-QString Explorer::explorer_current_file         = "";
-QString Explorer::explorer_current_file_data    = "";
+QString                 Explorer::explorer_directory            = "";
+QString                 Explorer::explorer_current_file         = "";
+std::vector<QString>    Explorer::explorer_current_file_data;
 
 void Explorer::get_directory(QString directory, std::vector<QString>& dir_vector)
 {
@@ -36,7 +36,7 @@ void Explorer::get_directory(QString directory, std::vector<QString>& dir_vector
     }
 }
 
-void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, Welcome* welcome, std::vector<QString> dir_vector)
+void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, Redactor* redactor, Welcome* welcome, std::vector<QString> dir_vector)
 {
     for (auto file : dir_vector)
     {
@@ -45,7 +45,7 @@ void Explorer::load_directory(Panel* panel, PanelTools* panel_tools, Welcome* we
         if (!(extension == "cpp" || extension == "hpp" || extension == "c" || extension == "h" ||
             extension == "gitignore" || QFileInfo(file).fileName() == "CMakeLists.txt")) continue;
 
-        PanelItem* panel_item = new PanelItem(panel, 600, panel->elements_size());
+        PanelItem* panel_item = new PanelItem(panel, redactor, 600, panel->elements_size());
 
         panel_item->set_file(file);
         panel_item->get_file()->set_text_size(13);

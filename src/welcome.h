@@ -17,6 +17,7 @@
 #include "player.h"
 #include "panel_tools.h"
 #include "panel.h"
+#include "redactor.h"
 
 #include <QWidget>
 #include <QString>
@@ -26,7 +27,7 @@ struct PanelTools;
 
 struct Welcome : Widget
 {
-    Welcome(QWidget* parent, int width, int height);
+    Welcome(QWidget* parent, Redactor* redactor, int width, int height);
 
     void            set_dialog_window_ptr(DialogWindow* dialog_window);
     void            set_panel_tools_ptr(PanelTools* panel_tools);
@@ -37,6 +38,7 @@ protected:
 
 private:
     QWidget*        parent;
+    Redactor*       redactor;
     Player*         player;
     DialogWindow*   dialog_window;
     PanelTools*     panel_tools;

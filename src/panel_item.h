@@ -1,12 +1,13 @@
 #ifndef PANEL_ITEM_H
 #define PANEL_ITEM_H
 
-#define PANEL_ITEM_SIZE 50
-#define SROLL_SPEED     20
+#define PANEL_ITEM_SIZE     50
+#define PANEL_SROLL_SPEED   20
 
 #include "ui/label.h"
 #include "ui/button.h"
 #include "ui/widget.h"
+#include "redactor.h"
 
 #include <QWidget>
 #include <QLabel>
@@ -16,7 +17,7 @@
 
 struct PanelItem : Widget
 {
-    PanelItem(QWidget* parent, int panel_width, int panel_elements_size);
+    PanelItem(QWidget* parent, Redactor* redactor, int panel_width, int panel_elements_size);
 
     void                        set_file(const QString& path);
     void                        set_panel_items_vector(std::vector<PanelItem *>& items);
@@ -42,6 +43,7 @@ private:
     Label*                      icon;
     Label*                      file;
     std::vector<PanelItem *>    items;
+    Redactor*                   redactor;
 
     void                        update_items_style();
 };

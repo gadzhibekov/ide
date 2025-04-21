@@ -1,9 +1,8 @@
 #include "welcome.h"
-
 #include "panel_tools.h"
-#include "translator.h"
-#include "explorer.h"
-#include "config.h"
+#include "utils/translator.h"
+#include "utils/explorer.h"
+#include "utils/config.h"
 #include "../styles/styles.h"
 
 #include <QObject>
@@ -11,7 +10,8 @@
 #include <QFileDialog>
 #include <QDesktopServices>
 
-Welcome::Welcome(QWidget* parent, int width, int height) : Widget(parent), parent(parent)
+Welcome::Welcome(QWidget* parent, Redactor* redactor, int width, int height) : 
+Widget(parent), parent(parent), redactor(redactor)
 {
     this->set_geometry(300, 0, width - 300, height);
 
@@ -121,7 +121,7 @@ void Welcome::open_dir_prototype_slot()
         Explorer::delete_directory(panel, panel_tools);
         Explorer::explorer_directory = directory_path;
         Explorer::get_directory(directory_path, items);
-        Explorer::load_directory(panel, panel_tools, this, items);
+        Explorer::load_directory(panel, panel_tools, redactor, this, items);
     }
 }
 

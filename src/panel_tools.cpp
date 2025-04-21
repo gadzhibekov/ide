@@ -1,7 +1,6 @@
 #include "panel_tools.h"
-
-#include "explorer.h"
-#include "translator.h"
+#include "utils/explorer.h"
+#include "utils/translator.h"
 #include "../styles/styles.h"
 
 #include <QCoreApplication>
@@ -138,7 +137,7 @@ void PanelTools::open_dir_click()
         Explorer::delete_directory(panel, this);
         Explorer::explorer_directory = directory_path;
         Explorer::get_directory(directory_path, items);
-        Explorer::load_directory(panel, this, welcome, items);
+        Explorer::load_directory(panel, this, redactor, welcome, items);
     }
 }
 
@@ -150,7 +149,7 @@ void PanelTools::refresh_click()
 
     Explorer::delete_directory(panel, this);
     Explorer::get_directory(Explorer::explorer_directory, items);
-    Explorer::load_directory(panel, this, welcome, items);
+    Explorer::load_directory(panel, this, redactor, welcome, items);
 }
 
 void PanelTools::set_dialog_window_ptr(DialogWindow* dialog_window)

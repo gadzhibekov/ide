@@ -1,6 +1,9 @@
 #ifndef DIALOG_WINDOW_H
 #define DIALOG_WINDOW_H
 
+#define DIALOG_WINDOW_MINIMUM_WIDTH     300
+#define DIALOG_WINDOW_MINIMUM_HEIGHT    200
+
 #include "button.h"
 #include "label.h"
 #include "widget.h"
@@ -25,7 +28,6 @@ struct DialogWindow : Widget
     void                        show_widget();
     void                        hide_widget();
 
-private:
     Label*                      title;
     Label*                      data;
     Button*                     ok;

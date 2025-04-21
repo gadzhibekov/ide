@@ -1,11 +1,12 @@
 #include "button.h"
 
+#include <QPalette>
 #include <QObject>
 #include <QIcon>
 #include <QSize>
-#include <QPalette>
 #include <QColor>
 #include <QFile>
+#include <QFont>
 
 Button::Button(QWidget* parent) : QPushButton(parent)
 {
@@ -84,6 +85,13 @@ void Button::set_text_color(int red, int green, int blue)
     QColor custom_color(red, green, blue);
     palette.setColor(QPalette::ButtonText, custom_color);
     this->setPalette(palette);
+}
+
+void Button::set_text_size(int size)
+{
+    QFont font = this->font();
+    font.setPointSize(size); 
+    this->setFont(font);
 }
 
 void Button::enterEvent(QEvent *event)

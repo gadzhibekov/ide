@@ -10,6 +10,7 @@
 #include "welcome.h"
 #include "redactor.h"
 #include "ui/dialog_window.h"
+#include "utils/config.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -20,7 +21,7 @@ struct Welcome;
 
 struct MainWindow : QMainWindow
 {
-    explicit MainWindow(QWidget* parent);
+    explicit MainWindow(QWidget* parent, const ConfigData& config_data);
     ~MainWindow();
 
 protected:

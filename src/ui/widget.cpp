@@ -1,5 +1,4 @@
 #include "widget.h"
-
 #include "../../styles/styles.h"
 
 #include <QFile>

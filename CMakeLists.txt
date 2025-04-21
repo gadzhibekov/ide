@@ -17,13 +17,15 @@ set(SOURCES
     src/panel.cpp
     src/panel_item.cpp
     src/panel_tools.cpp
-    src/explorer.cpp
     src/welcome.cpp
     src/player.cpp
-    src/config.cpp
-    src/translator.cpp
     src/redactor.cpp
     src/redactor_item.cpp
+
+    src/utils/explorer.cpp
+    src/utils/config.cpp
+    src/utils/translator.cpp
+
     src/ui/label.cpp
     src/ui/button.cpp
     src/ui/dialog_window.cpp
@@ -37,13 +39,15 @@ set(HEADERS
     src/panel.h
     src/panel_item.h
     src/panel_tools.h
-    src/explorer.h
     src/welcome.h
     src/player.h
-    src/config.h
-    src/translator.h
     src/redactor.h
     src/redactor_item.h
+
+    src/utils/explorer.h
+    src/utils/config.h
+    src/utils/translator.h
+    
     src/ui/label.h
     src/ui/button.h
     src/ui/dialog_window.h

@@ -1,13 +1,14 @@
 #include "panel_item.h"
-
-#include "explorer.h"
+#include "utils/explorer.h"
 #include "../styles/styles.h"
 
 #include <QFile>
+#include <QTextStream>
 
 #include <iostream>
 
-PanelItem::PanelItem(QWidget* parent, int panel_width, int panel_elements_size) : Widget(parent)
+PanelItem::PanelItem(QWidget* parent, Redactor* redactor, int panel_width, int panel_elements_size) 
+: Widget(parent), redactor(redactor)
 {
     icon    = new Label(this);
     file    = new Label(this);
@@ -41,14 +42,14 @@ void PanelItem::set_file(const QString& path)
 
 void PanelItem::scroll_up()
 {
-    y += SROLL_SPEED;
+    y += PANEL_SROLL_SPEED;
 
     this->setGeometry(0, y, w, h);
 }
 
 void PanelItem::scroll_down()
 {
-    y -= SROLL_SPEED;
+    y -= PANEL_SROLL_SPEED;
 
     this->setGeometry(0, y, w, h);
 }
@@ -78,10 +79,28 @@ void PanelItem::mouseDoubleClickEvent(QMouseEvent* event)
 
     if (current_file.open(QIODevice::ReadOnly | QIODevice::Text)) 
     {
-        Explorer::explorer_current_file_data = current_file.readAll();
+        redactor->remove_all();
+
+        Explorer::explorer_current_file_data.clear();
+
+        QTextStream in(&current_file);
+
+        while (!in.atEnd()) Explorer::explorer_current_file_data.push_back(in.readLine());
+
         current_file.close();
 
-        std::cout << Explorer::explorer_current_file_data.toStdString() << std::endl;
+        for (int i = 0; i < Explorer::explorer_current_file_data.size(); ++i)
+        {
+            RedactorItem* redactor_item = new RedactorItem(redactor, redactor->width(), redactor->get_items_vector().size());
+
+            redactor_item->set_index(static_cast<unsigned int>(i + 1));
+            redactor_item->set_line(Explorer::explorer_current_file_data[i]);
+            redactor_item->set_button_text_size(Redactor::item_text_size);
+            redactor_item->set_line_text_size(Redactor::item_text_size);
+
+            redactor->add_item(redactor_item);
+        }
+
     }
 
     QWidget::mouseDoubleClickEvent(event); 

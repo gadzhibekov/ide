@@ -1,10 +1,8 @@
 #include "main_window.h"
-
 #include "panel_item.h"
 #include "redactor_item.h"
-#include "explorer.h"
-#include "config.h"
-#include "translator.h"
+#include "utils/explorer.h"
+#include "utils/translator.h"
 #include "../styles/styles.h"
 
 #include <QString>
@@ -13,11 +11,11 @@
 #include <vector>
 #include <iostream>
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
+MainWindow::MainWindow(QWidget* parent, const ConfigData& config_data) : QMainWindow(parent)
 {
-    ConfigData config_data = Config::read();
+    ConfigData config = config_data;
 
-    Translator translator(config_data.language);
+    Translator translator(config.language);
 
     central_widget  = new QWidget(this);
 
@@ -27,7 +25,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     this->setWindowTitle(MAIN_WINDOW_TITLE);
     
     redactor        = new Redactor(central_widget, this->width(), this->height());
-    welcome         = new Welcome(central_widget, this->width(), this->height());
+    welcome         = new Welcome(central_widget, redactor, this->width(), this->height());
     panel           = new Panel(central_widget, MINIMUM_MAIN_WINDOW_WIDTH / 4, this->height());
     panel_tools     = new PanelTools(central_widget, this, panel, welcome, redactor, this->width() / 4);
     dialog_window   = new DialogWindow(central_widget, this->width(), this->height());
@@ -37,23 +35,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     welcome->set_panel_tools_ptr(panel_tools);
     welcome->set_panel_ptr(panel);
 
-
-    for (int i = 0; i < 10; ++i)
-    {
-        RedactorItem* ri = new RedactorItem(redactor, redactor->width(), redactor->get_items_vector().size());
-
-        ri->set_index(static_cast<unsigned int>(i + 1));
-        ri->set_line("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-
-        redactor->add_item(ri);
-    }
-
-
-    if (!config_data.last_project_dir.isEmpty())
+    if (!config.last_project_dir.isEmpty())
     {
         dialog_window->set_title_text(Translator::current_language_data_set[3]);
         dialog_window->set_title_text_size(12);
-        dialog_window->set_data_text(config_data.last_project_dir);
+        dialog_window->set_data_text(config.last_project_dir);
         dialog_window->set_data_text_size(10);
         dialog_window->set_cancel_btn_text(Translator::current_language_data_set[4]);
         dialog_window->set_ok_btn_text(Translator::current_language_data_set[5]);
@@ -62,9 +48,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
             std::vector<QString> items;
 
             Explorer::delete_directory(panel, panel_tools);
-            Explorer::explorer_directory = config_data.last_project_dir;
-            Explorer::get_directory(config_data.last_project_dir, items);
-            Explorer::load_directory(panel, panel_tools, welcome, items);
+            Explorer::explorer_directory = config.last_project_dir;
+            Explorer::get_directory(config.last_project_dir, items);
+            Explorer::load_directory(panel, panel_tools, redactor, welcome, items);
 
             dialog_window->hide_widget();
         });

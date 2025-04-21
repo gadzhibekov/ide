@@ -22,6 +22,7 @@ struct Button : QPushButton
     void                        set_icon_size(int width, int height);
     void                        set_style(const QString& css_file_path);
     void                        set_text_color(int red, int green, int blue);
+    void                        set_text_size(int size);
     void                        set_enter_slot(std::function<void()> slot);
     void                        set_leave_slot(std::function<void()> slot);
 

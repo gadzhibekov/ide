@@ -1,7 +1,10 @@
 #ifndef REDACTOR_ITEM_H
 #define REDACTOR_ITEM_H
 
-#define REDACTOR_ITEM_SIZE 30
+#define REDACTOR_SROLL_SPEED            40
+#define REDACTOR_ITEM_SIZE              30
+#define REDACTOR_ITEM_MINIMUM_TEXT_SIZE 10
+#define REDACTOR_ITEM_MAXIMUM_TEXT_SIZE 18
 
 #include "ui/widget.h"
 #include "ui/button.h"
@@ -17,6 +20,15 @@ struct RedactorItem : Widget
 
     void        set_index(unsigned int idx);
     void        set_line(const QString& line_data);
+    void        set_line_text_size(int size);
+    void        set_button_text_size(int size);      
+    void        set_line_text_size_with_save(int size);
+    void        set_button_text_size_with_save(int size);
+
+    void        scroll_up();
+    void        scroll_down();
+    void        scroll_right();
+    void        scroll_left();
 
     int         x;
     int         y;
