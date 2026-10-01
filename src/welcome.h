@@ -7,8 +7,8 @@
 #define US_FLAG_PATH        "../res/us_flag.png"
 #define TG_ICON_PATH        "../res/tg.png"
 #define GITHUB_ICON_PATH    "../res/github.png"
-#define GITHUB_LINK         "https://github.com/gadzhibekov/ide"
-#define TG_LINK             "https://t.me/gadzhibekov_05"
+#define GITHUB_LINK         "https://github.com/gadzhibekov/ide/blob/main/README.md"
+#define TG_LINK             "https://t.me/VarzAlayYif"
 
 #include "ui/button.h"
 #include "ui/label.h"
