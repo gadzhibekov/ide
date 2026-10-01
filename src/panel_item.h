@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QString>
 #include <QEvent>
+#include <QEnterEvent>
 #include <QMouseEvent>
 
 struct PanelItem : Widget
@@ -36,7 +37,7 @@ struct PanelItem : Widget
 protected:
     void                        mousePressEvent(QMouseEvent* event)         override;
     void                        mouseDoubleClickEvent(QMouseEvent *event)   override;
-    void                        enterEvent(QEvent *event)                   override;
+    void                        enterEvent(QEnterEvent *event)              override;
     void                        leaveEvent(QEvent *event)                   override;
 
 private:

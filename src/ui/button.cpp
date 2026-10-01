@@ -94,7 +94,7 @@ void Button::set_text_size(int size)
     this->setFont(font);
 }
 
-void Button::enterEvent(QEvent *event)
+void Button::enterEvent(QEnterEvent *event)
 {
     enter();
     QPushButton::enterEvent(event);

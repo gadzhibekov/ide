@@ -2,12 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 
 project(ide VERSION 1.0 LANGUAGES CXX)
 
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
  
-find_package(Qt5 COMPONENTS Core Widgets Multimedia MultimediaWidgets REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets Multimedia MultimediaWidgets REQUIRED)
 
 include_directories(src)
 
@@ -55,10 +54,6 @@ set(HEADERS
     src/ui/line_edit.h
 )
 
-message(STATUS "Qt5 Core version: ${Qt5Core_VERSION}")
-message(STATUS "Qt5 Widgets version: ${Qt5Widgets_VERSION}")
-message(STATUS "Qt5 Multimedia version: ${Qt5Multimedia_VERSION}")
-
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
+target_link_libraries(${PROJECT_NAME} Qt6::Core Qt6::Widgets Qt6::Multimedia Qt6::MultimediaWidgets)

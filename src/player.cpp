@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QFileInfo>
 #include <QUrl>
+#include <QAudioOutput>
 
 Player::Player(QWidget* parent, const QString& video_path) 
     : Widget(parent),
@@ -13,12 +14,15 @@ Player::Player(QWidget* parent, const QString& video_path)
 {
     video_player->setVideoOutput(video_widget);
 
+    QAudioOutput* audio_output = new QAudioOutput(this);
+    video_player->setAudioOutput(audio_output);
+
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(video_widget);
     setLayout(layout);
 
-    video_player->setMedia(QUrl::fromLocalFile(QFileInfo(video_path).absoluteFilePath()));
-    video_player->setVolume(0);
+    video_player->setSource(QUrl::fromLocalFile(QFileInfo(video_path).absoluteFilePath()));
+    audio_output->setVolume(0.0);
 
     QObject::connect(video_player, &QMediaPlayer::mediaStatusChanged, this, &Player::on_media_status_changed);
 

@@ -106,7 +106,7 @@ void PanelItem::mouseDoubleClickEvent(QMouseEvent* event)
     QWidget::mouseDoubleClickEvent(event); 
 }
 
-void PanelItem::enterEvent(QEvent* event)
+void PanelItem::enterEvent(QEnterEvent* event)
 {
     this->set_style(PANEL_TOOLS_ITEM_CLICK_STYLE_PATH);
 

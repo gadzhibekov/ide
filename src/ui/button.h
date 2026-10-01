@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QWidget>
 #include <QString>
+#include <QEnterEvent>
 #include <QEvent>
 
 #include <functional>
@@ -27,8 +28,8 @@ struct Button : QPushButton
     void                        set_leave_slot(std::function<void()> slot);
 
 protected:
-    void                        enterEvent(QEvent* event) override;
-    void                        leaveEvent(QEvent* event) override;
+    void                        enterEvent(QEnterEvent* event)  override;
+    void                        leaveEvent(QEvent* event)       override;
 
 private:
     std::function<void()>       slot_for_click;
